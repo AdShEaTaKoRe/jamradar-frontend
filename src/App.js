@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import SignInForm from "./components/SignInForm";
+import SignUpStages from "./components/signup/SignUpStages.jsx";
+import UsersList from "./components/UsersList.js";
+import API from "./API.js";
+import "./App.css";
+import { Route } from "react-router-dom";
+import Home from "./components/Home.jsx";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      username: null,
+      users: []
+    };
+  }
+
+  componentDidMount() {
+    // if (localStorage.token) {
+    //   API.validate(localStorage.token).then(json =>
+    //     this.signIn(json.username, json.token)
+    //   );
+    // }
+  }
+
+  signIn = (username, token) => {
+    this.setState({
+      username
+    });
+    localStorage.token = token;
+  };
+
+  signOut = () => {
+    this.setState({
+      username: null
+    });
+    localStorage.removeItem("token");
+  };
+
+  render() {
+    return (
+      <div>
+        <Route exact path="/" component={() => <Home />} />
+        <Route
+          exact
+          path="/users"
+          component={() => <UsersList users={this.state.users} />}
+        />
+        <Route exact path="/sign-up" component={() => <SignUpStages />} />
+      </div>
+    );
+  }
 }
 
 export default App;
