@@ -20,12 +20,14 @@ class SignUpStages extends React.Component {
       hometown: "",
       profession: "",
       genres: [],
+      instruments: [],
       level: "",
-      aspiration: ""
+      goal: "",
+      bio: ""
     }
   };
 
-  nextStage = e => {
+  nextStage = () => {
     this.setState({
       currentStage: this.state.currentStage + 1
     });
@@ -34,10 +36,55 @@ class SignUpStages extends React.Component {
   handleChange = event => {
     const inputType = event.target.name;
     const inputValue = event.target.value;
-    this.setState(state => {
-      state[inputType] = inputValue;
-      return state;
+    const userDetails = this.state.userDetails;
+    userDetails[inputType] = inputValue;
+    this.setState({
+      userDetails: userDetails
     });
+  };
+
+  // handleGenreSelection = genreId => {
+  //   let { userDetails } = this.state;
+  //   if (userDetails.genres.includes(genreId)) {
+  //     userDetails.genres = userDetails.genres.filter(
+  //       genre => genre !== genreId
+  //     );
+  //   } else {
+  //     userDetails.genres.push(genreId);
+  //   }
+  //   this.setState({
+  //     userDetails: userDetails
+  //   });
+  // };
+
+  // handleInstrumentSelection = instrumentId => {
+  //   let { userDetails } = this.state;
+  //   if (userDetails.instruments.includes(instrumentId)) {
+  //     userDetails.instruments = userDetails.instruments.filter(
+  //       instrument => instrument !== instrumentId
+  //     );
+  //   } else {
+  //     userDetails.instruments.push(instrumentId);
+  //   }
+  //   this.setState({
+  //     userDetails: userDetails
+  //   });
+  // };
+
+  handleListSelection = (type, value) => {
+    let { userDetails } = this.state;
+    if (userDetails[type].includes(value)) {
+      userDetails[type] = userDetails[type].filter(el => el !== value);
+    } else {
+      userDetails[type].push(value);
+    }
+    this.setState({
+      userDetails: userDetails
+    });
+  };
+
+  handleSubmit = () => {
+    API.submitNewUser(this.state.userDetails);
   };
 
   previousStage = () => {
@@ -53,6 +100,7 @@ class SignUpStages extends React.Component {
           <UserDetailsStage
             nextStage={this.nextStage}
             handleChange={this.handleChange}
+            userDetails={this.state.userDetails}
           />
         ) : (
           ""
@@ -61,7 +109,8 @@ class SignUpStages extends React.Component {
           <UserProfessionStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            selectInstrument={this.handleListSelection}
+            instruments={this.state.userDetails.instruments}
           />
         ) : (
           ""
@@ -70,7 +119,8 @@ class SignUpStages extends React.Component {
           <UserGenresStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            selectGenre={this.handleListSelection}
+            genres={this.state.userDetails.genres}
           />
         ) : (
           ""
@@ -80,6 +130,7 @@ class SignUpStages extends React.Component {
             nextStage={this.nextStage}
             previousStage={this.previousStage}
             handleChange={this.handleChange}
+            userDetails={this.state.userDetails}
           />
         ) : (
           ""
@@ -89,6 +140,7 @@ class SignUpStages extends React.Component {
             nextStage={this.nextStage}
             previousStage={this.previousStage}
             handleChange={this.handleChange}
+            userDetails={this.state.userDetails}
           />
         ) : (
           ""
@@ -97,6 +149,8 @@ class SignUpStages extends React.Component {
           <UserAboutStage
             previousStage={this.previousStage}
             handleChange={this.handleChange}
+            userDetails={this.state.userDetails}
+            handleSubmit={this.handleSubmit}
           />
         ) : (
           ""

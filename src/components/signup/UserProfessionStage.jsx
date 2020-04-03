@@ -1,16 +1,28 @@
 import React from "react";
+import API from "../../API.js";
 
-const UserProfessionStage = ({ nextStage, previousStage, handleChange }) => (
+const UserProfessionStage = ({
+  nextStage,
+  previousStage,
+  selectInstrument,
+  instruments
+}) => (
   <>
-    <h1> User Profession</h1>
-    <select name="profession" onChange={handleChange}>
-        <option value="Profession">I am a</option>
-        <option value="Singer">Singer</option>
-        <option value="Guitar player">Guitar player</option>
-        <option value="Bass player">Bass player</option>
-        <option value="Keyboard player">Keyboard player</option>
-        <option value="Drummer">Drummer</option>
-      </select><br/>
+    <h1> User Instruments</h1>
+    <ul>
+      {API.getInstruments().map(instrument => (
+        <li>
+          <input
+            type="checkbox"
+            key={instrument.id}
+            value={instrument.name}
+            checked={instruments.includes(instrument.id)}
+            onChange={() => selectInstrument("instruments", instrument.id)}
+          />
+          {instrument.name}
+        </li>
+      ))}
+    </ul>
     <button onClick={previousStage}>Back</button>
     <button onClick={nextStage}>Next</button>
   </>

@@ -6,6 +6,7 @@ import API from "./API.js";
 import "./App.css";
 import { Route } from "react-router-dom";
 import Home from "./components/Home.jsx";
+import QuestionnaireStages from "./components/questionair/QuestionaireStages";
 
 class App extends React.Component {
   constructor() {
@@ -22,6 +23,8 @@ class App extends React.Component {
     //     this.signIn(json.username, json.token)
     //   );
     // }
+
+    API.init()
   }
 
   signIn = (username, token) => {
@@ -48,6 +51,7 @@ class App extends React.Component {
           component={() => <UsersList users={this.state.users} />}
         />
         <Route exact path="/sign-up" component={() => <SignUpStages />} />
+        <Route exact path="/questionnaire" component={() => <QuestionnaireStages />} />
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import React from "react";
 import API from "../../API.js";
 
-const UserGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
+const MatchGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
   <>
-    <h1> User Genres</h1>
+    <h1> What genres must they know?</h1>
     <ul>
       {API.getGenres().map(genre => (
         <li>
@@ -23,4 +23,4 @@ const UserGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
   </>
 );
 
-export { UserGenresStage };
+export { MatchGenresStage };
