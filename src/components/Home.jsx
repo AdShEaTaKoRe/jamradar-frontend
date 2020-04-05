@@ -6,7 +6,7 @@ const Home = () => (
   <div>
     <img src={logo} alt="" width="600" />
     <Link to="/sign-up">Sign Up</Link>
-    <button>Login</button>
+    <Link to="/sign-in">Sign in</Link>
   </div>
 );
 

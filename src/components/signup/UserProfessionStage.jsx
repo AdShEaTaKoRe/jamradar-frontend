@@ -11,10 +11,9 @@ const UserProfessionStage = ({
     <h1> User Instruments</h1>
     <ul>
       {API.getInstruments().map(instrument => (
-        <li>
+        <li key={instrument.id}>
           <input
             type="checkbox"
-            key={instrument.id}
             value={instrument.name}
             checked={instruments.includes(instrument.id)}
             onChange={() => selectInstrument("instruments", instrument.id)}

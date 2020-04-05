@@ -6,13 +6,12 @@ const MatchGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => 
     <h1> What genres must they know?</h1>
     <ul>
       {API.getGenres().map(genre => (
-        <li>
+        <li key={genre.id}>
           <input
             type="checkbox"
-            key={genre.id}
             value={genre.name}
             checked={genres.includes(genre.id)}
-            onChange={() => selectGenre("genres", genre.id)}
+            onChange={() => selectGenre("match_genre", genre.id)}
           />
           {genre.name}
         </li>

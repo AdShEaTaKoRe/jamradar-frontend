@@ -4,21 +4,28 @@ import { MatchInstrumentsStage } from "./MatchInstrumentsStage.jsx";
 import { MatchGenresStage } from "./MatchGenresStage.jsx";
 import { MatchLevelStage } from "./MatchLevelStage.jsx";
 import { MatchGoalStage } from "./MatchGoalStage.jsx";
-
+import { MatchDetailsStage } from "./MatchDetailsStage.jsx";
 
 class QuestionnaireStages extends React.Component {
   state = {
     currentStage: 1,
     userPreferences: {
-      instruments: [],
-      genres: [],
-      goal: "",
-      level: "",
-      age_min: "",
-      age_max: "",
-      user_id: ""
+      match_instrument: [],
+      match_genre: [],
+      match_goal: "",
+      match_level: "",
+      min_age: "",
+      max_age: ""
     }
   };
+
+  componentDidMount() {
+    if (this.props.preferences) {
+      this.setState({
+        userPreferences: this.props.preferences
+      });
+    }
+  }
 
   nextStage = () => {
     this.setState({
@@ -45,17 +52,20 @@ class QuestionnaireStages extends React.Component {
   handleListSelection = (type, value) => {
     let { userPreferences } = this.state;
     if (userPreferences[type].includes(value)) {
-        userPreferences[type] = userPreferences[type].filter(el => el !== value);
+      userPreferences[type] = userPreferences[type].filter(el => el !== value);
     } else {
-        userPreferences[type].push(value);
+      userPreferences[type].push(value);
     }
     this.setState({
-        userPreferences: userPreferences
+      userPreferences: userPreferences
     });
   };
 
   handleSubmit = () => {
-    API.submitNewMatchDetails(this.state.userPreferences);
+    const { userPreferences } = this.state;
+    API.submitQuestionnaire(userPreferences, localStorage.token).then(() =>
+      this.props.saveQuestionnaire(userPreferences)
+    );
   };
 
   render() {
@@ -65,7 +75,7 @@ class QuestionnaireStages extends React.Component {
           <MatchInstrumentsStage
             nextStage={this.nextStage}
             selectInstrument={this.handleListSelection}
-            instruments={this.state.userPreferences.instruments}
+            instruments={this.state.userPreferences.match_instrument}
           />
         ) : (
           ""
@@ -74,13 +84,13 @@ class QuestionnaireStages extends React.Component {
           <MatchGenresStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            selectInstrument={this.handleListSelection}
-            genres={this.state.userPreferences.genres}
+            selectGenre={this.handleListSelection}
+            genres={this.state.userPreferences.match_genre}
           />
         ) : (
           ""
         )}
-                {this.state.currentStage === 3 ? (
+        {this.state.currentStage === 3 ? (
           <MatchLevelStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
@@ -90,7 +100,7 @@ class QuestionnaireStages extends React.Component {
         ) : (
           ""
         )}
-                {this.state.currentStage === 4 ? (
+        {this.state.currentStage === 4 ? (
           <MatchGoalStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
@@ -100,18 +110,17 @@ class QuestionnaireStages extends React.Component {
         ) : (
           ""
         )}
-                {this.state.currentStage === 5 ? (
-          <MatchGoalStage
+        {this.state.currentStage === 5 ? (
+          <MatchDetailsStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
             handleChange={this.handleChange}
             userPreferences={this.state.userPreferences}
+            handleSubmit={this.handleSubmit}
           />
         ) : (
           ""
         )}
-
-
       </>
     );
   }

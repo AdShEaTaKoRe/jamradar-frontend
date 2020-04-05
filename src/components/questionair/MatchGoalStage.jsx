@@ -3,8 +3,8 @@ import React from "react"
 const MatchGoalStage = ({ nextStage, previousStage, handleChange, userPreferences }) => (
     <>
       <h1> For the purpose of?</h1>
-      <select name="goal" value={userPreferences.goal} onChange={handleChange}>
-        <option value="goal">My goal is</option>
+      <select name="match_goal" value={userPreferences.match_goal} onChange={handleChange}>
+        <option value="goal">Their goal should be</option>
         <option value="Improvement">Improvement</option>
         <option value="Forming a band">Forming a band</option>
         <option value="Musician for their band">Musician for my band</option>

@@ -15,7 +15,6 @@ const UserAboutStage = ({ previousStage, handleChange, userDetails, handleSubmit
     ></textarea>
     <button onClick={previousStage}>Back</button>
     <button onClick={handleSubmit}>Submit</button>
-    <Link to="/questionnaire">Questionnaire</Link>
   </>
 );
 

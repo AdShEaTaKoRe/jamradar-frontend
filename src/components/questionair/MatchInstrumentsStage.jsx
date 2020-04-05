@@ -10,13 +10,12 @@ const MatchInstrumentsStage = ({
       <h1> What musician/s are you looking for</h1>
       <ul>
         {API.getInstruments().map(instrument => (
-          <li>
+          <li key={instrument.id}>
             <input
               type="checkbox"
-              key={instrument.id}
               value={instrument.name}
               checked={instruments.includes(instrument.id)}
-              onChange={() => selectInstrument("instruments", instrument.id)}
+              onChange={() => selectInstrument("match_instrument", instrument.id)}
             />
             {instrument.name}
           </li>

@@ -6,10 +6,9 @@ const UserGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
     <h1> User Genres</h1>
     <ul>
       {API.getGenres().map(genre => (
-        <li>
+        <li key={genre.id}>
           <input
             type="checkbox"
-            key={genre.id}
             value={genre.name}
             checked={genres.includes(genre.id)}
             onChange={() => selectGenre("genres", genre.id)}

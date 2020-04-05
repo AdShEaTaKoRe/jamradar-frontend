@@ -3,8 +3,8 @@ import React from "react"
 const MatchLevelStage = ({ nextStage, previousStage, handleChange, userPreferences }) => (
     <>
       <h1> Their level should be?</h1>
-      <select name="level" value={userPreferences.level} onChange={handleChange}>
-        <option value="level">My level is</option>
+      <select name="match_level" value={userPreferences.match_level} onChange={handleChange}>
+        <option value="level">At the level of </option>
         <option value="Beginner">Beginner</option>
         <option value="Intermediate">Intermediate</option>
         <option value="Seasoned Musician">Seasoned Musician</option>

@@ -6,7 +6,7 @@ const signUpUrl = `${baseURL}/sign-up`;
 let genres = [];
 let instruments = [];
 
-const post = (url, data) => {
+const post = (url, data, token) => {
   const configurationObject = {
     method: "POST",
     headers: {
@@ -15,23 +15,30 @@ const post = (url, data) => {
     },
     body: JSON.stringify(data)
   };
-  return fetch(url, configurationObject);
+  if (token) {
+    configurationObject.headers.Authorization = token;
+  }
+  return fetch(url, configurationObject).then(response => response.json());
 };
 
 const get = (url, token) => {
-  return token ? fetch(url, { headers: { AUTHORIZATION: token } }) : fetch(url);
+  return token
+    ? fetch(url, { headers: { AUTHORIZATION: token } }).then(response =>
+        response.json()
+      )
+    : fetch(url).then(response => response.json());
 };
 
 const validate = token => {
-  return get(validateURL, token).then(response => response.json());
+  return get(validateURL, token);
 };
 
 const signIn = data => {
-  return post(signInURL, data).then(response => response.json());
+  return post(signInURL, data);
 };
 
 const signUp = data => {
-  return post(signUpUrl, data).then(response => response.json());
+  return post(signUpUrl, data);
 };
 
 const getGenres = () => {
@@ -51,30 +58,29 @@ const init = () => {
 };
 
 const submitNewUser = (user, cb) => {
-  fetch("http://localhost:3000/users", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body:JSON.stringify(user)
-  })
-  .then(cb)
-}
+  post("http://localhost:3000/users", user).then(cb);
+};
 
-const submitNewMatchDetails = (user, cb) => {
-  fetch("http://localhost:3000/user_question_details", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body:JSON.stringify(user)
-  })
-  .then(cb)
-}
+const submitQuestionnaire = (user, token) => {
+  const userPreferences = {...user}
+  userPreferences.match_instrument = userPreferences.match_instrument.join(",")
+  userPreferences.match_genre = userPreferences.match_genre.join(",")
+  return post("http://localhost:3000/user_question_details", userPreferences, token);
+};
 
-
+const getUserPreferences = token => {
+  return get("http://localhost:3000/user_question_details", token);
+};
 
 // Export the necessary functions as part of one object which we will import elsewhere
-export default { signIn, validate, signUp, getGenres, getInstruments, init ,submitNewUser, submitNewMatchDetails };
+export default {
+  signIn,
+  validate,
+  signUp,
+  getGenres,
+  getInstruments,
+  init,
+  submitNewUser,
+  submitQuestionnaire,
+  getUserPreferences
+};
