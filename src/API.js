@@ -72,6 +72,14 @@ const getUserPreferences = token => {
   return get("http://localhost:3000/user_question_details", token);
 };
 
+const getMatches = token => {
+  return get("http://localhost:3000/users", token);
+}
+
+const getCandidates = token => {
+  return get("http://localhost:3000/candidates", token);
+}
+
 // Export the necessary functions as part of one object which we will import elsewhere
 export default {
   signIn,
@@ -82,5 +90,7 @@ export default {
   init,
   submitNewUser,
   submitQuestionnaire,
-  getUserPreferences
+  getUserPreferences,
+  getMatches,
+  getCandidates
 };
