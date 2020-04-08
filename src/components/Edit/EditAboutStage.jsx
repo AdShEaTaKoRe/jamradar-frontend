@@ -1,11 +1,10 @@
 import React from "react";
 
 
-const UserAboutStage = ({ previousStage, handleChange, userDetails, handleSubmit, beginUpload }) => (
+const EditAboutStage = ({handleChange, userDetails, handleSubmit, beginUpload }) => (
 
   <>
-    <h1> About me and Submit</h1>
-    <button onClick={beginUpload}>Upload Image</button>
+    <button onClick={beginUpload}>Upload Image</button><br/>
     <textarea
       name="bio"
       id="bio"
@@ -14,10 +13,9 @@ const UserAboutStage = ({ previousStage, handleChange, userDetails, handleSubmit
       placeholder="Tell us about yourself/ Add links to your music etc"
       value={userDetails.bio}
       onChange={handleChange}
-    ></textarea>
-    <button onClick={previousStage}>Back</button>
+    ></textarea><br/>
     <button onClick={handleSubmit}>Submit</button>
   </>
 );
 
-export { UserAboutStage };
+export { EditAboutStage };

@@ -6,6 +6,7 @@ import { UserGenresStage } from "./UserGenresStage.jsx";
 import { UserLevelStage } from "./UserLevelStage.jsx";
 import { UserAspirationStage } from "./UserAspirationStage.jsx";
 import { UserAboutStage } from "./UserAboutStage.jsx";
+import { fetchPhotos, openUploadWidget } from "../../CloudinaryService.js";
 
 class SignUpStages extends React.Component {
   state = {
@@ -23,9 +24,31 @@ class SignUpStages extends React.Component {
       instruments: [],
       level: "",
       goal: "",
-      bio: ""
+      bio: "",
+      image: ""
     }
   };
+
+  beginUpload = tag => {
+    const uploadOptions = {
+      cloudName: "jamradar",
+      tags: [tag],
+      uploadPreset: "upload"
+    };
+  
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if(photos.event === 'success'){
+          this.setState({
+            userDetails: {...this.state.userDetails, image: photos.info.public_id}
+          })
+        }
+      } else {
+        console.log(error);
+      }
+    })
+  }
 
   nextStage = () => {
     this.setState({
@@ -151,6 +174,7 @@ class SignUpStages extends React.Component {
             handleChange={this.handleChange}
             userDetails={this.state.userDetails}
             handleSubmit={this.handleSubmit}
+            beginUpload={this.beginUpload}
           />
         ) : (
           ""

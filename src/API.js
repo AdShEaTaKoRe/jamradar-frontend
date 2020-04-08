@@ -57,8 +57,8 @@ const init = () => {
     .then(json => (instruments = json));
 };
 
-const submitNewUser = (user, cb) => {
-  post("http://localhost:3000/users", user).then(cb);
+const submitNewUser = (user, token, cb) => {
+  post("http://localhost:3000/users", user, token).then(cb);
 };
 
 const submitQuestionnaire = (user, token) => {
@@ -78,6 +78,10 @@ const getMatches = token => {
 
 const getCandidates = token => {
   return get("http://localhost:3000/candidates", token);
+}
+
+const getUserForEdit = token => {
+  return get("http://localhost:3000/user/")
 }
 
 // Export the necessary functions as part of one object which we will import elsewhere

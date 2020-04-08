@@ -25,6 +25,7 @@ class QuestionnaireStages extends React.Component {
         userPreferences: this.props.preferences
       });
     }
+  
   }
 
   nextStage = () => {

@@ -6,9 +6,12 @@ import "./App.css";
 import { Route, Redirect, Link } from "react-router-dom";
 import Home from "./components/Home.jsx";
 import QuestionnaireStages from "./components/questionair/QuestionaireStages";
-// import {Image, Video, CloudinaryContext} from 'cloudinary-react';
+import {CloudinaryContext} from 'cloudinary-react';
 import Matches from "./components/Matches/Matches.jsx";
 import Candidates from "./components/Candidates/Candidates.jsx";
+import NavBar from "./components/NavBar.jsx";
+import EditProfileMain from "./components/Edit/EditProfileMain.jsx";
+
 
 class App extends React.Component {
   constructor() {
@@ -17,6 +20,7 @@ class App extends React.Component {
       email: null,
       preferences: null,
       matches: [],
+      userDetails: {}
     };
   }
 
@@ -30,6 +34,8 @@ class App extends React.Component {
 
     API.init();
   }
+
+  
 
   signIn = (email, token) => {
     if (email && token)
@@ -70,8 +76,18 @@ class App extends React.Component {
   };
   getAllUsers = () => {};
 
+
+  
+  
+
+
+
+
   render() {
+    
     return (
+      <CloudinaryContext cloudName="jamradar">
+      <NavBar signOut={this.signOut}/>
       <div>
         {!this.state.email && (
           <Route exact path="/" component={() => <Home />} />
@@ -82,7 +98,7 @@ class App extends React.Component {
           ""
         )}
         {this.state.preferences && <Link to="/candidates">Candidates</Link>}
-        <Route exact path="/sign-up" component={() => <SignUpStages />} />
+        <Route exact path="/sign-up" component={() => <SignUpStages userDetails={this.state.userDetails}/>} />
         <Route
           exact
           path="/questionnaire"
@@ -111,7 +127,9 @@ class App extends React.Component {
           )}
         />
         <Route exact path="/candidates" component={() => <Candidates />} />
+        <Route exact path="/edit" component={() => <EditProfileMain />}/>
       </div>
+      </CloudinaryContext>
     );
   }
 }
