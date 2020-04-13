@@ -7,6 +7,7 @@ import { UserLevelStage } from "./UserLevelStage.jsx";
 import { UserAspirationStage } from "./UserAspirationStage.jsx";
 import { UserAboutStage } from "./UserAboutStage.jsx";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService.js";
+import { Route, Redirect, Link } from "react-router-dom";
 
 class SignUpStages extends React.Component {
   state = {
@@ -66,33 +67,6 @@ class SignUpStages extends React.Component {
     });
   };
 
-  // handleGenreSelection = genreId => {
-  //   let { userDetails } = this.state;
-  //   if (userDetails.genres.includes(genreId)) {
-  //     userDetails.genres = userDetails.genres.filter(
-  //       genre => genre !== genreId
-  //     );
-  //   } else {
-  //     userDetails.genres.push(genreId);
-  //   }
-  //   this.setState({
-  //     userDetails: userDetails
-  //   });
-  // };
-
-  // handleInstrumentSelection = instrumentId => {
-  //   let { userDetails } = this.state;
-  //   if (userDetails.instruments.includes(instrumentId)) {
-  //     userDetails.instruments = userDetails.instruments.filter(
-  //       instrument => instrument !== instrumentId
-  //     );
-  //   } else {
-  //     userDetails.instruments.push(instrumentId);
-  //   }
-  //   this.setState({
-  //     userDetails: userDetails
-  //   });
-  // };
 
   handleListSelection = (type, value) => {
     let { userDetails } = this.state;
@@ -107,8 +81,11 @@ class SignUpStages extends React.Component {
   };
 
   handleSubmit = () => {
-    API.submitNewUser(this.state.userDetails);
-  };
+    API.submitNewUser(this.state.userDetails)
+    .then((json) => this.props.signIn(json.user.email, json.token))
+    };
+
+  
 
   previousStage = () => {
     this.setState({
@@ -117,6 +94,7 @@ class SignUpStages extends React.Component {
   };
 
   render() {
+
     return (
       <>
         {this.state.currentStage === 1 ? (

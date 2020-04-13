@@ -3,15 +3,14 @@ import SignInForm from "./components/SignInForm.jsx";
 import SignUpStages from "./components/signup/SignUpStages.jsx";
 import API from "./API.js";
 import "./App.css";
-import { Route, Redirect, Link } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Home from "./components/Home.jsx";
 import QuestionnaireStages from "./components/questionair/QuestionaireStages";
-import {CloudinaryContext} from 'cloudinary-react';
+import { CloudinaryContext } from "cloudinary-react";
 import Matches from "./components/Matches/Matches.jsx";
 import Candidates from "./components/Candidates/Candidates.jsx";
 import NavBar from "./components/NavBar.jsx";
 import EditProfileMain from "./components/Edit/EditProfileMain.jsx";
-
 
 class App extends React.Component {
   constructor() {
@@ -20,38 +19,49 @@ class App extends React.Component {
       email: null,
       preferences: null,
       matches: [],
-      userDetails: {}
+      userDetails: {},
     };
   }
 
   componentDidMount() {
-    if (localStorage.token) {
-      API.validate(localStorage.token)
-
-        // Pass the username and token the server sends back to signIn
-        .then((json) => this.signIn(json.email, json.token));
-    }
-
     API.init();
+    if (localStorage.token) {
+      API.validate(localStorage.token).then((json) =>
+        this.signIn(json.email, json.token)
+      );
+    }
+    
   }
 
-  
+  componentDidUpdate () {
+    if(this.props.location.pathname === "/") {
+      if (this.state.email && !this.state.preferences)
+        this.redirectTo("/questionnaire");
+      if (this.state.preferences) this.redirectTo("/candidates");
+    }
+  }
+
+  redirectTo = (path) => {
+    const { history, location } = this.props;
+    if (history && location && location.pathname !== path) history.push(path);
+  };
 
   signIn = (email, token) => {
-    if (email && token)
-    {
+    if (email && token) {
       localStorage.token = token;
       API.getUserPreferences(token).then((json) => {
-        this.setState({
-          email: email,
-          preferences: {
+        let sessionState = { email };
+        if (json) {
+          sessionState.preferences = {
             ...json,
             match_instrument: json.match_instrument
               ?.split(",")
               .map((e) => parseInt(e)),
             match_genre: json.match_genre?.split(",").map((e) => parseInt(e)),
-          },
-        });
+          };
+        }
+        
+        this.setState(sessionState, () => {this.redirectTo("/")})
       });
     }
 
@@ -65,6 +75,9 @@ class App extends React.Component {
   signOut = () => {
     this.setState({
       email: null,
+      preferences: null,
+      matches: [],
+      userDetails: {},
     });
     localStorage.removeItem("token");
   };
@@ -72,66 +85,61 @@ class App extends React.Component {
   saveQuestionnaire = (preferences) => {
     this.setState({
       preferences,
-    });
+    }, () => {this.redirectTo("/")});
   };
   getAllUsers = () => {};
 
-
-  
-  
-
-
-
-
   render() {
-    
     return (
       <CloudinaryContext cloudName="jamradar">
-      <NavBar signOut={this.signOut}/>
-      <div>
-        {!this.state.email && (
-          <Route exact path="/" component={() => <Home />} />
-        )}
-        {this.state.email && !this.state.preferences ? (
-          <Redirect to="/questionnaire" />
-        ) : (
-          ""
-        )}
-        {this.state.preferences && <Link to="/candidates">Candidates</Link>}
-        <Route exact path="/sign-up" component={() => <SignUpStages userDetails={this.state.userDetails}/>} />
-        <Route
-          exact
-          path="/questionnaire"
-          component={() => (
-            <QuestionnaireStages
-              saveQuestionnaire={this.saveQuestionnaire}
-              preferences={this.state.preferences}
-            />
+        <NavBar signOut={this.signOut} />
+        <div>
+          {!this.state.email && (
+            <Route exact path="/" component={() => <Home />} />
           )}
-        />
+          <Route
+            exact
+            path="/sign-up"
+            component={() => (
+              <SignUpStages
+                userDetails={this.state.userDetails}
+                signIn={this.signIn}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/questionnaire"
+            component={() => (
+              <QuestionnaireStages
+                saveQuestionnaire={this.saveQuestionnaire}
+                preferences={this.state.preferences}
+              />
+            )}
+          />
 
-        <Route
-          exact
-          path="/sign-in"
-          component={() => <SignInForm signIn={this.signIn} />}
-        />
-        <Route
-          exact
-          path="/matches"
-          component={() => (
-            <Matches
-              email={this.state.email}
-              preferences={this.state.preferences}
-              users={this.state.users}
-            />
-          )}
-        />
-        <Route exact path="/candidates" component={() => <Candidates />} />
-        <Route exact path="/edit" component={() => <EditProfileMain />}/>
-      </div>
+          <Route
+            exact
+            path="/sign-in"
+            component={() => <SignInForm signIn={this.signIn} />}
+          />
+          <Route
+            exact
+            path="/matches"
+            component={() => (
+              <Matches
+                email={this.state.email}
+                preferences={this.state.preferences}
+                users={this.state.users}
+              />
+            )}
+          />
+          <Route exact path="/candidates" component={() => <Candidates />} />
+          <Route exact path="/edit" component={() => <EditProfileMain redirectTo={this.redirectTo}/>} />
+        </div>
       </CloudinaryContext>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

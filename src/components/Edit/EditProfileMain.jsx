@@ -31,10 +31,18 @@ class EditProfile extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.userDetails)
+  API.getUserDetails(localStorage.token)
+    .then(userDetails => {
       this.setState({
-        userDetails: this.props.userDetails,
+        userDetails:{
+          ...userDetails,
+          genres: userDetails.genres.map(genre => genre.id),
+          instruments: userDetails.instruments.map(instrument => instrument.id)
+        }
       });
+    })
+    
+
   }
 
   handleChange = (event) => {
@@ -43,7 +51,7 @@ class EditProfile extends React.Component {
     const userDetails = this.state.userDetails;
     userDetails[inputType] = inputValue;
     this.setState({
-      userDetails: userDetails,
+      userDetails
     });
   };
 
@@ -55,13 +63,20 @@ class EditProfile extends React.Component {
       userDetails[type].push(value);
     }
     this.setState({
-      userDetails: userDetails,
+      userDetails
     });
   };
 
   handleSubmit = () => {
-    API.submitNewUser(this.state.userDetails, localStorage.token);
+    API.updateUser(this.state.userDetails, localStorage.token)
+    .then(() => {this.props.redirectTo("/")});
   };
+
+
+
+  // handleDelete = () => {
+  //   API.deleteData(this.state.)
+  // }
 
   render() {
     return (

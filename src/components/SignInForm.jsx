@@ -1,41 +1,42 @@
-import React from 'react'
-import API from "../API.js"
-
+import React from "react";
+import API from "../API.js";
 
 class SignInForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       email: "",
       password: ""
-    }
+    };
   }
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit = () => {
     API.signIn(this.state)
-            .then(json => this.props.signIn(json.email, json.token))
-  }
+      .then((json) => this.props.signIn(json.email, json.token))
+  };
 
   render() {
-    return(
-      <form onSubmit={this.handleSubmit}>
+
+    return (
+      <div >
         <label>Email:</label>
-        <input type="email" name="email" onChange={this.handleChange}/><br/>
+        <input type="email" name="email" onChange={this.handleChange} />
+        <br />
 
         <label>Password:</label>
-        <input type="password" name="password" onChange={this.handleChange}/><br/>
+        <input type="password" name="password" onChange={this.handleChange} />
+        <br />
 
-        <input type="submit" value="Sign In"/>
-      </form>
-    )
+        <button onClick={this.handleSubmit}>Sign In</button>
+      </div>
+    );
   }
 }
 
-export default SignInForm
+export default SignInForm;

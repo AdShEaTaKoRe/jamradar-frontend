@@ -66,7 +66,7 @@ class QuestionnaireStages extends React.Component {
     const { userPreferences } = this.state;
     API.submitQuestionnaire(userPreferences, localStorage.token).then(() =>
       this.props.saveQuestionnaire(userPreferences)
-    );
+    )
   };
 
   render() {
