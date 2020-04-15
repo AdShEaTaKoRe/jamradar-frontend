@@ -12,8 +12,8 @@ class EditProfile extends React.Component {
     super();
     this.state = {
       userDetails: {
-        firstN: "",
-        lastN: "",
+        first_name: "",
+        last_name: "",
         password: "",
         email: "",
         age: "",
@@ -26,23 +26,25 @@ class EditProfile extends React.Component {
         goal: "",
         bio: "",
         image: "",
+        youtube: "",
+        facebook: "",
+        instagram: ""
       },
     };
   }
 
   componentDidMount() {
-  API.getUserDetails(localStorage.token)
-    .then(userDetails => {
+    API.getUserDetails(localStorage.token).then((userDetails) => {
       this.setState({
-        userDetails:{
+        userDetails: {
           ...userDetails,
-          genres: userDetails.genres.map(genre => genre.id),
-          instruments: userDetails.instruments.map(instrument => instrument.id)
-        }
+          genres: userDetails.genres.map((genre) => genre.id),
+          instruments: userDetails.instruments.map(
+            (instrument) => instrument.id
+          ),
+        },
       });
-    })
-    
-
+    });
   }
 
   handleChange = (event) => {
@@ -51,7 +53,7 @@ class EditProfile extends React.Component {
     const userDetails = this.state.userDetails;
     userDetails[inputType] = inputValue;
     this.setState({
-      userDetails
+      userDetails,
     });
   };
 
@@ -63,16 +65,19 @@ class EditProfile extends React.Component {
       userDetails[type].push(value);
     }
     this.setState({
-      userDetails
+      userDetails,
     });
   };
 
   handleSubmit = () => {
-    API.updateUser(this.state.userDetails, localStorage.token)
-    .then(() => {this.props.redirectTo("/")});
+    API.updateUser(this.state.userDetails, localStorage.token).then(() => {
+      this.props.redirectTo("/");
+    });
   };
 
+  // handleDeleteAccount = () => {
 
+  // }
 
   // handleDelete = () => {
   //   API.deleteData(this.state.)
@@ -80,8 +85,17 @@ class EditProfile extends React.Component {
 
   render() {
     return (
-      <>
-        <EditDetailsStage userDetails={this.state.userDetails} handleChange={this.handleChange}/>
+      <div className="ui column grid">
+      <div className="column" style={{ maxWidth: "450px" }}>
+                 <img
+          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
+          alt=""
+          className="ui fluid image"
+        />
+        <EditDetailsStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleChange}
+        />
         <EditProfessionStage
           selectInstrument={this.handleListSelection}
           instruments={this.state.userDetails.instruments}
@@ -90,14 +104,21 @@ class EditProfile extends React.Component {
           selectGenre={this.handleListSelection}
           genres={this.state.userDetails.genres}
         />
-        <EditLevelStage userDetails={this.state.userDetails} handleChange={this.handleChange} />
-        <EditAspirationStage userDetails={this.state.userDetails} handleChange={this.handleChange} />
+        <EditLevelStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleChange}
+        />
+        <EditAspirationStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleChange}
+        />
         <EditAboutStage
           handleChange={this.handleChange}
           userDetails={this.state.userDetails}
           handleSubmit={this.handleSubmit}
         />
-      </>
+      </div>
+      </div>
     );
   }
 }

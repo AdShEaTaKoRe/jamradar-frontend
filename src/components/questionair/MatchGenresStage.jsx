@@ -1,25 +1,38 @@
 import React from "react";
 import API from "../../API.js";
+import { Checkbox } from "semantic-ui-react";
 
-const MatchGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
-  <>
-    <h1> What genres must they know?</h1>
-    <ul>
-      {API.getGenres().map(genre => (
-        <li key={genre.id}>
-          <input
+const MatchGenresStage = ({
+  nextStage,
+  previousStage,
+  selectGenre,
+  genres,
+}) => (
+  <div className="ui form">
+    <h3> What genres must they know</h3>
+    <div className="ui fluid card">
+      {API.getGenres().map((genre) => (
+        <div key={genre.id}>
+          <Checkbox
+            toggle
             type="checkbox"
             value={genre.name}
             checked={genres.includes(genre.id)}
             onChange={() => selectGenre("match_genre", genre.id)}
           />
           {genre.name}
-        </li>
+        </div>
       ))}
-    </ul>
-    <button onClick={previousStage}>Back</button>
-    <button onClick={nextStage}>Next</button>
-  </>
+    </div>
+    <br></br>
+    <br />
+    <button className="ui left floated button" onClick={previousStage}>
+      Back
+    </button>
+    <button className="ui right floated button" onClick={nextStage}>
+      Next
+    </button>
+  </div>
 );
 
 export { MatchGenresStage };

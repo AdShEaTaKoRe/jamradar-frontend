@@ -13,90 +13,103 @@ class SignUpStages extends React.Component {
   state = {
     currentStage: 1,
     userDetails: {
-      firstN: "",
-      lastN: "",
+      first_name: "",
+      last_name: "",
       password: "",
       email: "",
       age: "",
       gender: "",
       hometown: "",
-      profession: "",
       genres: [],
       instruments: [],
       level: "",
       goal: "",
       bio: "",
-      image: ""
-    }
+      band_name: "",
+      image: "",
+      youtube: "",
+      facebook: "",
+      instagram: "",
+    },
   };
 
-  beginUpload = tag => {
+  beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "jamradar",
       tags: [tag],
-      uploadPreset: "upload"
+      uploadPreset: "upload",
     };
-  
+
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {
         console.log(photos);
-        if(photos.event === 'success'){
+        if (photos.event === "success") {
           this.setState({
-            userDetails: {...this.state.userDetails, image: photos.info.public_id}
-          })
+            userDetails: {
+              ...this.state.userDetails,
+              image: photos.info.public_id,
+            },
+          });
         }
       } else {
         console.log(error);
       }
-    })
-  }
-
-  nextStage = () => {
-    this.setState({
-      currentStage: this.state.currentStage + 1
     });
   };
 
-  handleChange = event => {
+  nextStage = () => {
+    this.setState({
+      currentStage: this.state.currentStage + 1,
+    });
+  };
+
+  handleChange = (event) => {
     const inputType = event.target.name;
     const inputValue = event.target.value;
     const userDetails = this.state.userDetails;
     userDetails[inputType] = inputValue;
     this.setState({
-      userDetails: userDetails
+      userDetails: userDetails,
     });
   };
-
 
   handleListSelection = (type, value) => {
     let { userDetails } = this.state;
     if (userDetails[type].includes(value)) {
-      userDetails[type] = userDetails[type].filter(el => el !== value);
+      userDetails[type] = userDetails[type].filter((el) => el !== value);
     } else {
       userDetails[type].push(value);
     }
     this.setState({
-      userDetails: userDetails
+      userDetails: userDetails,
     });
   };
 
   handleSubmit = () => {
-    API.submitNewUser(this.state.userDetails)
-    .then((json) => this.props.signIn(json.user.email, json.token))
-    };
-
-  
+    API.submitNewUser(this.state.userDetails).then((json) =>
+      this.props.signIn(json.user.email, json.token)
+    );
+  };
 
   previousStage = () => {
     this.setState({
-      currentStage: this.state.currentStage - 1
+      currentStage: this.state.currentStage - 1,
     });
   };
 
   render() {
-
     return (
-      <>
+      <div
+      className="ui center aligned middle aligned grid"
+      style={{ height: "100vh" }}
+    >
+      <div className="ui column grid">
+      <div className="column" style={{ maxWidth: "450px" }}>
+                 <img
+          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
+          alt=""
+          className="ui fluid image"
+        />
         {this.state.currentStage === 1 ? (
           <UserDetailsStage
             nextStage={this.nextStage}
@@ -157,7 +170,9 @@ class SignUpStages extends React.Component {
         ) : (
           ""
         )}
-      </>
+      </div>
+      </div>
+      </div>
     );
   }
 }

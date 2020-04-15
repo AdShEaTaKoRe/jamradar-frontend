@@ -1,0 +1,115 @@
+
+
+
+<div class="ui segment">
+    <img src="/images/wireframe/image.png" class="ui medium centered image" />
+
+
+
+
+
+
+ <div className="ui column">
+    <div className="ui card" key={match.id} onClick={this.frontBackToggle}>
+      <div className="image">
+        <img alt="oh no!" src='./blank-profile-picture.png' />
+      </div>
+      <div className="content">
+        <div className="header">
+          {match.first_name}, {match.band_name}
+        </div>
+
+        <div className="meta text-wrap">
+          <small>About:<br></br>match
+              {match.bio}</small>
+        </div>
+      </div>
+      <div className="extra content">
+        <span>
+          <i className="icon heartbeat" />
+          {match.age}
+        </span>
+
+        <span>
+          <i className="icon music" />
+          {match.instruments.map(instrument => (instrument.name + ' '))}<br></br>
+        </span>
+        <span>
+          <i className="icon home" />
+          {match.hometown}
+        </span>
+        <span>
+            <Button.Group>
+                <Button style={{backgroundColor: "red"}} onClick={() => {this.handleUnmatch(match.id)}}>
+                    <Icon name="thumbs down outline" />
+                  Unmatch
+                </Button>
+                <Button.Or />
+                <Button positive href={`mailto:${match.email}`}
+                >
+                    <Icon name="mail" />
+                  Contact me
+                </Button>
+                </Button.Group>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div key={match.id}>
+    <h3>
+      {match.first_name}, {match.age}
+    </h3>
+    <h2>{match.instruments.name}</h2>
+    <h3>{match.hometown}</h3>
+    <p>{match.bio}</p>
+    <div className="ui buttons">
+    <button className ="ui button" onClick={() => {this.handleUnmatch(match.id)}}>Unmatch</button>
+    <div className="or"></div>
+    <a className="ui positive button" href={`mailto:${match.email}`} >Contact me</a>
+    </div>
+    </div>
+
+
+    <br></br>
+    <br />
+   
+    
+    <button className="ui left floated button" onClick={previousStage}>Back</button>
+    <button className="ui right floated button" onClick={nextStage}>Next</button>
+
+
+
+
+
+
+
+
+
+    <div>
+        <button className="ui right floated button">Right Floated</button>
+        <button className="ui left floated button">Left Floated</button>
+      </div>
+
+      <button className="ui instagram circular icon button">
+        <i aria-hidden="true" className="instagram icon"></i>
+      </button>
+      <button className="ui facebook circular icon button">
+        <i aria-hidden="true" className="facebook icon"></i>
+      </button>
+      <button className="ui youtube circular icon button">
+        <i aria-hidden="true" className="youtube icon"></i>
+      </button>
+
+
+
+
+
+      <div className="ui two column grid">
+        <div className="row bot-army-row">

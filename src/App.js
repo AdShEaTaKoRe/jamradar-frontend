@@ -30,11 +30,10 @@ class App extends React.Component {
         this.signIn(json.email, json.token)
       );
     }
-    
   }
 
-  componentDidUpdate () {
-    if(this.props.location.pathname === "/") {
+  componentDidUpdate() {
+    if (this.props.location.pathname === "/") {
       if (this.state.email && !this.state.preferences)
         this.redirectTo("/questionnaire");
       if (this.state.preferences) this.redirectTo("/candidates");
@@ -60,8 +59,10 @@ class App extends React.Component {
             match_genre: json.match_genre?.split(",").map((e) => parseInt(e)),
           };
         }
-        
-        this.setState(sessionState, () => {this.redirectTo("/")})
+
+        this.setState(sessionState, () => {
+          this.redirectTo("/");
+        });
       });
     }
 
@@ -83,17 +84,22 @@ class App extends React.Component {
   };
 
   saveQuestionnaire = (preferences) => {
-    this.setState({
-      preferences,
-    }, () => {this.redirectTo("/")});
+    this.setState(
+      {
+        preferences,
+      },
+      () => {
+        this.redirectTo("/");
+      }
+    );
   };
   getAllUsers = () => {};
 
   render() {
     return (
       <CloudinaryContext cloudName="jamradar">
-        <NavBar signOut={this.signOut} />
-        <div>
+        {(this.state.email) ? (<NavBar email={this.state.email} signOut={this.signOut} />) : ""}
+        <div className="ui grid container">
           {!this.state.email && (
             <Route exact path="/" component={() => <Home />} />
           )}
@@ -135,7 +141,11 @@ class App extends React.Component {
             )}
           />
           <Route exact path="/candidates" component={() => <Candidates />} />
-          <Route exact path="/edit" component={() => <EditProfileMain redirectTo={this.redirectTo}/>} />
+          <Route
+            exact
+            path="/edit"
+            component={() => <EditProfileMain redirectTo={this.redirectTo} />}
+          />
         </div>
       </CloudinaryContext>
     );

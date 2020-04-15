@@ -89,10 +89,7 @@ const updateUser = (user, token) => {
 }
 
 const deleteData = (token) => {
-  return fetch(deleteUrl, {
-    method: 'delete'
-  }, token)
-  .then(response => response.json());
+  return request("DELETE", userUrl ,token)
 }
 
 const likeUser = (likedUserId, token) => {
@@ -101,6 +98,10 @@ const likeUser = (likedUserId, token) => {
 
 const getMatches = (token) => {
   return get(baseURL + '/matches', token)
+}
+
+const deleteMatch = (unmatchedUserId,token) => {
+  return request("DELETE", baseURL + '/matches', {liked_user: unmatchedUserId} ,token)
 }
 
 
@@ -120,5 +121,6 @@ export default {
   getUserDetails,
   deleteData,
   updateUser,
-  likeUser
+  likeUser,
+  deleteMatch
 };

@@ -1,23 +1,24 @@
 import React from "react";
 import API from "../../API.js";
+import { Checkbox } from 'semantic-ui-react'
 
 const EditGenresStage = ({selectGenre, genres }) => (
-  <>
-    <h3> Your Genres</h3>
-    <ul>
-      {API.getGenres().map(genre => (
-        <li key={genre.id}>
-          <input
-            type="checkbox"
-            value={genre.name}
-            checked={genres.includes(genre.id)}
-            onChange={() => selectGenre("genres", genre.id)}
-          />
-          {genre.name}
-        </li>
-      ))}
-    </ul>
-  </>
+  <div className="ui form">
+  <label> Your genres</label>
+  <div className="ui fluid card">
+    {API.getGenres().map(genre => (
+      <div key={genre.id}>
+        <Checkbox toggle
+          type="checkbox"
+          value={genre.name}
+          checked={genres.includes(genre.id)}
+          onChange={() => selectGenre("genres", genre.id)}
+        />
+        {genre.name}
+      </div>
+    ))}
+  </div>
+</div>
 );
 
 export { EditGenresStage };
