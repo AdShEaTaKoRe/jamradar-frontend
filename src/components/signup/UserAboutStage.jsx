@@ -41,7 +41,7 @@ const UserAboutStage = ({
       </div>
       <div className="field">
         <label htmlFor="form-input-control-instagram">
-          Instagram
+          Instagram (optional)
         </label>
         <div className="ui input">
           <input

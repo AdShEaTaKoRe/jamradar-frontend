@@ -58,7 +58,7 @@ class Matches extends React.Component {
                   key={match.id}
                 >
                   <div className="image" onClick={this.frontBackToggle}>
-                    <img alt="oh no!" src={`./${match.email}.jpg`} />
+                    <img alt="oh no!" src={`./${match.email}.jpg`} style={{height: "200px"}}/>
                   </div>
                   <div className="content">
                     <div className="header">

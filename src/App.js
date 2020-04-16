@@ -98,7 +98,7 @@ class App extends React.Component {
   render() {
     return (
       <CloudinaryContext cloudName="jamradar">
-        {(this.state.email) ? (<NavBar email={this.state.email} signOut={this.signOut} />) : ""}
+        {(this.state.email) ? (<NavBar  email={this.state.email} signOut={this.signOut} />) : ""}
         <div className="ui grid container">
           {!this.state.email && (
             <Route exact path="/" component={() => <Home />} />

@@ -24,7 +24,7 @@ class CandidateCard extends React.Component {
         >
           <div className="image">
 
-            <img  alt="oh no!" src={`./${candidate.email}.jpg`} onClick={this.frontBackToggle} />
+            <img  alt="oh no!" src={`./${candidate.email}.jpg`} onClick={this.frontBackToggle} style={{height: "200px", width: "290px"}}/>
           </div>
           <div className="content">
             <div className="header">
