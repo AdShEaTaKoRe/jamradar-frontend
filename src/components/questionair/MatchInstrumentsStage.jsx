@@ -2,14 +2,13 @@ import React from "react";
 import API from "../../API.js";
 import { Checkbox } from "semantic-ui-react";
 
-const UserProfessionStage = ({
+const MatchInstrumentsStage = ({
   nextStage,
-  previousStage,
   selectInstrument,
   instruments,
 }) => (
   <div className="ui form">
-    <h3> Please choose your instruments</h3>
+    <h3> What instruments should they play</h3>
     <div className="ui fluid card">
       {API.getInstruments().map((instrument) => (
         <div key={instrument.id}>
@@ -18,7 +17,7 @@ const UserProfessionStage = ({
             type="checkbox"
             defaultValue={instrument.name}
             checked={instruments.includes(instrument.id)}
-            onChange={() => selectInstrument("instruments", instrument.id)}
+            onChange={() => selectInstrument("match_instrument", instrument.id)}
           />
           {instrument.name}
         </div>
@@ -26,13 +25,10 @@ const UserProfessionStage = ({
     </div>
     <br></br>
     <br />
-    <button className="ui left floated button" onClick={previousStage}>
-      Back
-    </button>
     <button className="ui right floated button" onClick={nextStage}>
       Next
     </button>
   </div>
 );
 
-export { UserProfessionStage };
+export { MatchInstrumentsStage };

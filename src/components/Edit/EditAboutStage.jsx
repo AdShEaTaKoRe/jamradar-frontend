@@ -1,7 +1,6 @@
 import React from "react";
 
-const UserAboutStage = ({
-  previousStage,
+const EditAboutStage = ({
   handleChange,
   userDetails,
   handleSubmit,
@@ -9,7 +8,6 @@ const UserAboutStage = ({
 }) => (
   <div className="ui form">
     <div className="equal width fields">
-      <h3> Final stage</h3>
       <div className="field">
         <label htmlFor="form-input-control-band-name">
           Band name (Optional)
@@ -25,7 +23,6 @@ const UserAboutStage = ({
           />
         </div>
       </div>
-
       <div className="field">
         <label htmlFor="form-input-control-facebook">Facebook (Optional)</label>
         <div className="ui input">
@@ -41,7 +38,7 @@ const UserAboutStage = ({
       </div>
       <div className="field">
         <label htmlFor="form-input-control-instagram">
-          Instagram (optional)
+          Instagram (Optional)
         </label>
         <div className="ui input">
           <input
@@ -74,20 +71,15 @@ const UserAboutStage = ({
           name="bio"
           id="bio"
           cols="30"
-          rows="5"
+          rows="10"
           placeholder="Tell us about yourself/ Add links to your music etc"
           defaultValue={userDetails.bio}
           onChange={handleChange}
-        ></textarea>
+        ></textarea>{" "}
         <br></br>
         <br />
-        <button className="ui middle floated button" onClick={beginUpload}>
+        <button className="ui left floated button" onClick={beginUpload}>
           Upload Image
-        </button>
-        <br></br>
-        <br />
-        <button className="ui left floated button" onClick={previousStage}>
-          Back
         </button>
         <button className="ui right floated button" onClick={handleSubmit}>
           Submit
@@ -97,4 +89,4 @@ const UserAboutStage = ({
   </div>
 );
 
-export { UserAboutStage };
+export { EditAboutStage };

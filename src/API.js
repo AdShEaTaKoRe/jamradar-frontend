@@ -1,39 +1,139 @@
 // Define the URLs for our different routes
-const baseURL = "http://localhost:3001"
-const signInURL = `${baseURL}/sign-in`
-const validateURL = `${baseURL}/validate`
-const signUpUrl = `${baseURL}/sign-up`
+const baseURL = "http://localhost:3000";
+const signInURL = `${baseURL}/sign-in`;
+const validateURL = `${baseURL}/validate`;
+const signUpUrl = `${baseURL}/sign-up`;
+const userUrl = `${baseURL}/users`
+let genres = [];
+let instruments = [];
 
-
-const post = (url, data) => {
+const request = (method, url, data, token) => {
   const configurationObject = {
-    method: "POST",
+    method,
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
+  };
+  if (token) {
+    configurationObject.headers.Authorization = token;
   }
-  return fetch(url, configurationObject)
+  return fetch(url, configurationObject).then(response => response.json());
+}
+
+const submitPost = formData => {
+  const config = {
+    method: "POST",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Accept": "application/json"
+    },
+    body: formData
+  }
+  return fetch(userUrl, config)
+    .then(res => res.json());
 }
 
 const get = (url, token) => {
-  return token ? fetch(url, { headers: { AUTHORIZATION: token } }) : fetch(url)
-}
-
+  return token
+    ? fetch(url, { headers: { AUTHORIZATION: token } }).then(response =>
+        response.json()
+      )
+    : fetch(url).then(response => response.json());
+};
 
 const validate = token => {
-  return get(validateURL, token).then(response => response.json())
-}
+  return get(validateURL, token);
+};
 
-const signIn = data => {
-  return post(signInURL, data).then(response => response.json())
-}
+const signIn = (data,cb) => {
+  return request("POST",signInURL, data).then(cb);
+};
 
 const signUp = data => {
-  return post(signUpUrl, data).then(response => response.json())
+  return request("POST",signUpUrl, data);
+};
+
+const getGenres = () => {
+  return genres;
+};
+const getInstruments = () => {
+  return instruments;
+};
+
+const init = () => {
+  fetch("http://localhost:3000/genres")
+    .then(response => response.json())
+    .then(json => (genres = json));
+  fetch("http://localhost:3000/instruments")
+    .then(response => response.json())
+    .then(json => (instruments = json));
+};
+
+const submitNewUser = (user) => {
+  return request("POST", userUrl, user);
+};
+
+const submitQuestionnaire = (user, token) => {
+  const userPreferences = {...user}
+  userPreferences.match_instrument = userPreferences.match_instrument.join(",")
+  userPreferences.match_genre = userPreferences.match_genre.join(",")
+  return request("POST", "http://localhost:3000/user_question_details", userPreferences, token);
+};
+
+const getUserPreferences = token => {
+  return get("http://localhost:3000/user_question_details", token);
+};
+
+
+const getCandidates = token => {
+  return get("http://localhost:3000/candidates", token);
+}
+
+const getUserDetails = token => {
+  return get(userUrl, token)
+  
+}
+
+const updateUser = (user, token) => {
+  return request("PUT", userUrl, user, token)
+}
+
+const deleteData = (token) => {
+  return request("DELETE", userUrl , null ,token)
+}
+
+const likeUser = (likedUserId, token) => {
+  return request("POST", baseURL + '/like', likedUserId, token)
+}
+
+const getMatches = (token) => {
+  return get(baseURL + '/matches', token)
+}
+
+const deleteMatch = (unmatchedUserId,token) => {
+  return request("DELETE", baseURL + '/matches', {liked_user: unmatchedUserId} ,token)
 }
 
 
-// Export the necessary functions as part of one object which we will import elsewhere
-export default { signIn, validate, signUp }
+
+export default {
+  signIn,
+  validate,
+  signUp,
+  getGenres,
+  getInstruments,
+  init,
+  submitNewUser,
+  submitQuestionnaire,
+  getUserPreferences,
+  getMatches,
+  getCandidates,
+  getUserDetails,
+  deleteData,
+  updateUser,
+  likeUser,
+  deleteMatch,
+  submitPost
+};
