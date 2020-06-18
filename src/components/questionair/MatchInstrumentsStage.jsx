@@ -15,7 +15,7 @@ const MatchInstrumentsStage = ({
           <Checkbox
             toggle
             type="checkbox"
-            value={instrument.name}
+            defaultValue={instrument.name}
             checked={instruments.includes(instrument.id)}
             onChange={() => selectInstrument("match_instrument", instrument.id)}
           />

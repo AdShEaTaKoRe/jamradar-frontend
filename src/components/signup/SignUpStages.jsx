@@ -6,8 +6,7 @@ import { UserGenresStage } from "./UserGenresStage.jsx";
 import { UserLevelStage } from "./UserLevelStage.jsx";
 import { UserAspirationStage } from "./UserAspirationStage.jsx";
 import { UserAboutStage } from "./UserAboutStage.jsx";
-import { fetchPhotos, openUploadWidget } from "../../CloudinaryService.js";
-import { Route, Redirect, Link } from "react-router-dom";
+import { openUploadWidget } from "../../CloudinaryService.js";
 
 class SignUpStages extends React.Component {
   state = {
@@ -87,7 +86,7 @@ class SignUpStages extends React.Component {
 
   handleSubmit = () => {
     API.submitNewUser(this.state.userDetails).then((json) =>
-      this.props.signIn(json.user.email, json.token)
+      this.props.signIn(json.email, json.token)
     );
   };
 

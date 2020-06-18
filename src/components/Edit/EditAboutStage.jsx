@@ -18,7 +18,7 @@ const EditAboutStage = ({
             name="band_name"
             placeholder="Band name"
             id="form-input-control-Band-name"
-            value={userDetails.band_name}
+            defaultValue={userDetails.band_name}
             onChange={handleChange}
           />
         </div>
@@ -31,7 +31,7 @@ const EditAboutStage = ({
             name="facebook"
             placeholder="Facebook"
             id="form-input-control-facebook"
-            value={userDetails.facebook}
+            defaultValue={userDetails.facebook}
             onChange={handleChange}
           />
         </div>
@@ -46,7 +46,7 @@ const EditAboutStage = ({
             name="instagram"
             placeholder="Instagram"
             id="form-input-control-instagram"
-            value={userDetails.instagram}
+            defaultValue={userDetails.instagram}
             onChange={handleChange}
           />
         </div>
@@ -59,7 +59,7 @@ const EditAboutStage = ({
             name="youtube"
             placeholder="YouTube"
             id="form-input-control-youtube"
-            value={userDetails.youtube}
+            defaultValue={userDetails.youtube}
             onChange={handleChange}
           />
         </div>
@@ -73,7 +73,7 @@ const EditAboutStage = ({
           cols="30"
           rows="10"
           placeholder="Tell us about yourself/ Add links to your music etc"
-          value={userDetails.bio}
+          defaultValue={userDetails.bio}
           onChange={handleChange}
         ></textarea>{" "}
         <br></br>
@@ -81,7 +81,6 @@ const EditAboutStage = ({
         <button className="ui left floated button" onClick={beginUpload}>
           Upload Image
         </button>
-        <br />
         <button className="ui right floated button" onClick={handleSubmit}>
           Submit
         </button>

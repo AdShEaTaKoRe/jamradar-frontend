@@ -11,14 +11,14 @@ const MatchGoalStage = ({
     <select
       className="ui fluid dropdown"
       name="match_goal"
-      value={userPreferences.match_goal}
+      defaultValue={userPreferences.match_goal}
       onChange={handleChange}
     >
-      <option value="goal">Their goal should be</option>
-      <option value="Improvement">Improvement</option>
-      <option value="Forming a band">Forming a band</option>
-      <option value="Musician for their band">Musician for my band</option>
-      <option value="Just here to jam">Just here to jam</option>
+      <option defaultValue="goal">Their goal should be</option>
+      <option defaultValue="Improvement">Improvement</option>
+      <option defaultValue="Forming a band">Forming a band</option>
+      <option defaultValue="Musician for their band">Musician for my band</option>
+      <option defaultValue="Just here to jam">Just here to jam</option>
     </select>{" "}
     <br></br>
     <br />

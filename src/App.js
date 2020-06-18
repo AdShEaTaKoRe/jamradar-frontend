@@ -144,7 +144,7 @@ class App extends React.Component {
           <Route
             exact
             path="/edit"
-            component={() => <EditProfileMain redirectTo={this.redirectTo} />}
+            component={() => <EditProfileMain redirectTo={this.redirectTo} signOut={this.signOut}/>}
           />
         </div>
       </CloudinaryContext>

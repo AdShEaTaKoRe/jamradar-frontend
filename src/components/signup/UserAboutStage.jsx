@@ -20,7 +20,7 @@ const UserAboutStage = ({
             name="band_name"
             placeholder="Band name"
             id="form-input-control-Band-name"
-            value={userDetails.band_name}
+            defaultValue={userDetails.band_name}
             onChange={handleChange}
           />
         </div>
@@ -34,7 +34,7 @@ const UserAboutStage = ({
             name="facebook"
             placeholder="Facebook"
             id="form-input-control-facebook"
-            value={userDetails.facebook}
+            defaultValue={userDetails.facebook}
             onChange={handleChange}
           />
         </div>
@@ -49,7 +49,7 @@ const UserAboutStage = ({
             name="instagram"
             placeholder="Instagram"
             id="form-input-control-instagram"
-            value={userDetails.instagram}
+            defaultValue={userDetails.instagram}
             onChange={handleChange}
           />
         </div>
@@ -62,7 +62,7 @@ const UserAboutStage = ({
             name="youtube"
             placeholder="YouTube"
             id="form-input-control-youtube"
-            value={userDetails.youtube}
+            defaultValue={userDetails.youtube}
             onChange={handleChange}
           />
         </div>
@@ -76,7 +76,7 @@ const UserAboutStage = ({
           cols="30"
           rows="5"
           placeholder="Tell us about yourself/ Add links to your music etc"
-          value={userDetails.bio}
+          defaultValue={userDetails.bio}
           onChange={handleChange}
         ></textarea>
         <br></br>

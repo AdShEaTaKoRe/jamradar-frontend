@@ -16,7 +16,7 @@ const MatchGenresStage = ({
           <Checkbox
             toggle
             type="checkbox"
-            value={genre.name}
+            defaultValue={genre.name}
             checked={genres.includes(genre.id)}
             onChange={() => selectGenre("match_genre", genre.id)}
           />

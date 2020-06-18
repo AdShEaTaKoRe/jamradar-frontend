@@ -11,7 +11,7 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
             name="first_name"
             placeholder="First name"
             id="form-input-control-first-name"
-            value={userDetails.first_name}
+            defaultValue={userDetails.first_name}
             onChange={handleChange}
           />
         </div>
@@ -24,7 +24,7 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
             name="last_name"
             placeholder="Last name"
             id="form-input-control-last-name"
-            value={userDetails.last_name}
+            defaultValue={userDetails.last_name}
             onChange={handleChange}
           />
         </div>
@@ -37,7 +37,7 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
             name="password"
             placeholder="Password"
             id="form-input-control-password"
-            value={userDetails.password}
+            defaultValue={userDetails.password}
             onChange={handleChange}
           />
         </div>
@@ -50,17 +50,17 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
             name="email"
             placeholder="joe@schmoe.com"
             id="form-input-control-email"
-            value={userDetails.email}
+            defaultValue={userDetails.email}
             onChange={handleChange}
           />
         </div>
       </div>
       <div className="ui form">
-      <select className="ui fluid dropdown" name="gender" value={userDetails.gender} onChange={handleChange}>
-        <option value="gender">Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Non-Binary">Non-Binary</option>
+      <select className="ui fluid dropdown" name="gender" defaultValue={userDetails.gender} onChange={handleChange}>
+        <option defaultValue="gender">Gender</option>
+        <option defaultValue="Male">Male</option>
+        <option defaultValue="Female">Female</option>
+        <option defaultValue="Non-Binary">Non-Binary</option>
       </select>
       </div>
       <div className="field">
@@ -71,7 +71,7 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
             name="age"
             placeholder="Age"
             id="form-input-control-age"
-            value={userDetails.age}
+            defaultValue={userDetails.age}
             onChange={handleChange}
           />
         </div>
@@ -83,7 +83,7 @@ const UserDetailsStage = ({ nextStage, handleChange, userDetails }) => (
           placeholder="Hometown"
           name="hometown"
           id="form-textarea-control-hometown"
-          value={userDetails.hometown}
+          defaultValue={userDetails.hometown}
           onChange={handleChange}
         ></input>
       </div>

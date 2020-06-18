@@ -17,7 +17,7 @@ const MatchDetailsStage = ({
             name="min_age"
             placeholder="Min Age"
             id="form-input-control-min-age"
-            defaultValue={userPreferences.min_age}
+            defaultdefaultValue={userPreferences.min_age}
             onChange={handleChange}
           />
         </div>
@@ -31,7 +31,7 @@ const MatchDetailsStage = ({
             name="max_age"
             placeholder="Max Age"
             id="form-input-control-max-age"
-            defaultValue={userPreferences.max_age}
+            defaultdefaultValue={userPreferences.max_age}
             onChange={handleChange}
           />
         </div>
@@ -44,7 +44,7 @@ const MatchDetailsStage = ({
             name="hometown"
             placeholder="Hometown"
             id="form-input-control-hometown"
-            defaultValue={userPreferences.hometown}
+            defaultdefaultValue={userPreferences.hometown}
             onChange={handleChange}
           />
         </div>

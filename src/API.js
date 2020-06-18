@@ -3,7 +3,6 @@ const baseURL = "http://localhost:3000";
 const signInURL = `${baseURL}/sign-in`;
 const validateURL = `${baseURL}/validate`;
 const signUpUrl = `${baseURL}/sign-up`;
-const deleteUrl = `${baseURL}/destroy`;
 const userUrl = `${baseURL}/users`
 let genres = [];
 let instruments = [];
@@ -21,6 +20,19 @@ const request = (method, url, data, token) => {
     configurationObject.headers.Authorization = token;
   }
   return fetch(url, configurationObject).then(response => response.json());
+}
+
+const submitPost = formData => {
+  const config = {
+    method: "POST",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Accept": "application/json"
+    },
+    body: formData
+  }
+  return fetch(userUrl, config)
+    .then(res => res.json());
 }
 
 const get = (url, token) => {
@@ -89,7 +101,7 @@ const updateUser = (user, token) => {
 }
 
 const deleteData = (token) => {
-  return request("DELETE", userUrl ,token)
+  return request("DELETE", userUrl , null ,token)
 }
 
 const likeUser = (likedUserId, token) => {
@@ -122,5 +134,6 @@ export default {
   deleteData,
   updateUser,
   likeUser,
-  deleteMatch
+  deleteMatch,
+  submitPost
 };
