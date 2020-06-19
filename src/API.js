@@ -77,7 +77,7 @@ const init = () => {
 };
 
 const submitNewUser = (user) => {
-  return request("POST", userUrl, user);
+  return request("POST", signUpUrl, user);
 };
 
 const submitQuestionnaire = (user, token) => {
