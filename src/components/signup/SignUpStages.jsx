@@ -167,7 +167,7 @@ class SignUpStages extends React.Component {
             beginUpload={this.beginUpload}
           />
         ) : (
-          ""
+          " "
         )}
       </div>
       </div>
