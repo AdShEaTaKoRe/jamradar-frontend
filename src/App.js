@@ -74,13 +74,13 @@ class App extends React.Component {
   };
 
   signOut = () => {
+    localStorage.removeItem("token");
     this.setState({
       email: null,
       preferences: null,
       matches: [],
       userDetails: {},
     });
-    localStorage.removeItem("token");
   };
 
   saveQuestionnaire = (preferences) => {
@@ -110,6 +110,7 @@ class App extends React.Component {
               <SignUpStages
                 userDetails={this.state.userDetails}
                 signIn={this.signIn}
+                redirectTo={this.redirectTo}
               />
             )}
           />
