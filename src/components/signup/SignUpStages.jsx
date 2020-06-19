@@ -87,7 +87,7 @@ class SignUpStages extends React.Component {
   handleSubmit = () => {
     API.submitNewUser(this.state.userDetails).then((json) =>
       this.props.signIn(json.email, json.token)
-    ).then(this.props.RedirectTo("/"))
+    )
   };
 
   previousStage = () => {
