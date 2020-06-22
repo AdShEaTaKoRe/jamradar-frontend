@@ -33,7 +33,6 @@ class Matches extends React.Component {
           matches: matches.filter((match) => match.id !== matchId),
         })
       )
-      .then(() => console.log(this.state.matches));
   };
 
   render() {

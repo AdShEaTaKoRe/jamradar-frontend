@@ -44,7 +44,6 @@ class EditProfile extends React.Component {
 
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {
-        console.log(photos);
         if (photos.event === "success") {
           this.setState({
             userDetails: {
@@ -53,8 +52,6 @@ class EditProfile extends React.Component {
             },
           });
         }
-      } else {
-        console.log(error);
       }
     });
   };
