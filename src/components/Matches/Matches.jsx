@@ -70,10 +70,8 @@ class Matches extends React.Component {
 
                   {!this.state.toggle ? (
                     <div className="meta text-wrap">
-                      <medium>
                         About:<br></br>
                         {match.bio}
-                      </medium>
                     </div>
                   ) : (
                     <div className="meta text-wrap">

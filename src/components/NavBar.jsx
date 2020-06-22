@@ -45,7 +45,7 @@ class NavBar extends React.Component {
                     className="minus icon"
                     style={{ color: "red" }}
                   ></i>
-                  Log-Out
+                  Log Out
                 </Link>
               ) : (
                 ""
