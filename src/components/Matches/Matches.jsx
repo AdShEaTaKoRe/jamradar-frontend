@@ -47,10 +47,9 @@ class Matches extends React.Component {
         {matches.length > 0 ? <h3> Here are your Matches!</h3> : ""}
         {matches.length > 0 ? (
           matches.map((match) => (
-            <div className="column">
+            <div className="column" key={match.id}>
               <div
                 className="ui fluid card "
-                key={match.id}
               >
                 <div className="ui fluid image" onClick={this.frontBackToggle}>
                   {match.image ?  <img
