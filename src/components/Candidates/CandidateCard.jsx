@@ -40,10 +40,8 @@ class CandidateCard extends React.Component {
             <br></br>
             {!this.state.toggle ? (
               <div className="meta text-wrap">
-                <medium>
                   About:<br></br>
                   {candidate.bio}
-                </medium>
               </div>
             ) : (
               <div className="meta text-wrap">
