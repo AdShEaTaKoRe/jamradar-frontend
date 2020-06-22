@@ -11,15 +11,15 @@ const MatchLevelStage = ({
     <select
       className="ui fluid selection dropdown"
       name="match_level"
-      defaultValue={userPreferences.match_level}
+      value={userPreferences.match_level}
       onChange={handleChange}
     >
-      <option defaultValue="level">Level </option>
-      <option defaultValue="Beginner">Beginner</option>
-      <option defaultValue="Intermediate">Intermediate</option>
-      <option defaultValue="Seasoned Musician">Seasoned Musician</option>
-      <option defaultValue="Professional Musician">Professional Musician</option>
-      <option defaultValue="Just here to jam">Just here to jam</option>
+      <option value="level">Level </option>
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Seasoned Musician">Seasoned Musician</option>
+      <option value="Professional Musician">Professional Musician</option>
+      <option value="Just here to jam">Just here to jam</option>
     </select>{" "}
     <br></br>
     <br />
