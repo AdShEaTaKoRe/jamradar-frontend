@@ -112,11 +112,6 @@ class EditProfile extends React.Component {
     return (
       <div className="ui column grid">
         <div className="column" style={{ maxWidth: "450px" }}>
-          <img
-            src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-            alt=""
-            className="ui fluid image"
-          />
           <EditDetailsStage
             userDetails={this.state.userDetails}
             handleChange={this.handleChange}

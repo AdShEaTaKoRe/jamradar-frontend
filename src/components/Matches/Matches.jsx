@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../API.js";
-import { Icon, Button, Grid } from "semantic-ui-react";
+import { Icon, Button, Grid} from "semantic-ui-react";
 
 class Matches extends React.Component {
   constructor() {
@@ -38,16 +38,11 @@ class Matches extends React.Component {
   render() {
     const { matches } = this.state;
     return (
-      <div className="ui two column grid">
-        <img
-          className="ui fluid image"
-          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-          alt=""
-        />
+      <div >
         {matches.length > 0 ? <h3> Here are your Matches!</h3> : ""}
         {matches.length > 0 ? (
           matches.map((match) => (
-            <div className="column" key={match.id}>
+            <Grid.Column key={match.id}>
               <div
                 className="ui fluid card "
               >
@@ -140,7 +135,7 @@ class Matches extends React.Component {
                 </div>
               </div>
               <br />
-            </div>
+            </Grid.Column>
           ))
         ) : (
           <div className="ui icon message">

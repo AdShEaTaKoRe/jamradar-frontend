@@ -1,6 +1,7 @@
 import React from "react";
 import API from "../../API.js";
 import CandidateCard from "./CandidateCard.jsx";
+import { Container } from "semantic-ui-react";
 
 class Candidates extends React.Component {
   constructor() {
@@ -59,12 +60,7 @@ class Candidates extends React.Component {
     const { candidates } = this.state;
 
     return (
-      <div className="column" style={{ maxWidth: "450px" }}>
-                 <img
-          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-          alt=""
-          className="ui fluid image"
-        />
+      <Container className="candidates" textAlign="center" fluid={true}>
         {this.state.candidates.length > 0 ? (
           <CandidateCard
             candidate={candidates[0]}
@@ -80,7 +76,7 @@ class Candidates extends React.Component {
             </div>
           </div>
         )}
-      </div>
+      </Container>
     );
   }
 }

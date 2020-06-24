@@ -26,19 +26,9 @@ class SignInForm extends React.Component {
     return (
       <div
         className="ui center aligned middle aligned grid"
-        style={{ height: "100vh" }}
       >
         <div className="column" style={{ maxWidth: "450px" }}>
-        <img
-          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-          alt="" style={{ maxWidth: "250px" }}
-        />
           <h2 className="ui black center aligned header">
-            <img
-              src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-              className="ui image"
-              alt=""
-            />
             Log-in to your account
           </h2>
           <div className="ui large form">

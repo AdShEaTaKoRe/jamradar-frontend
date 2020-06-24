@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Container, Menu } from "semantic-ui-react"
 
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="ui grid container">
-        <div className="ui column">
-          <div className="ui top fixed menu">
+      <Container className="nav-bar">
+          <Menu fixed="top" fluid={true}>
             <div
               className="ui fluid labeled icon menu"
               style={{ backgroundColor: "#ffff99" }}
@@ -51,9 +51,8 @@ class NavBar extends React.Component {
                 ""
               )}
             </div>
-          </div>
-        </div>
-      </div>
+          </Menu>
+        </Container>
     );
   }
 }

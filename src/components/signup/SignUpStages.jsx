@@ -101,11 +101,6 @@ class SignUpStages extends React.Component {
     >
       <div className="ui column grid">
       <div className="column" style={{ maxWidth: "450px" }}>
-                 <img
-          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-          alt=""
-          className="ui fluid image"
-        />
         {this.state.currentStage === 1 ? (
           <UserDetailsStage
             nextStage={this.nextStage}
