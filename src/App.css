@@ -58,3 +58,8 @@
 .candidates {
   margin-bottom: 15px;
 }
+
+.signin {
+  max-width: 400px;
+  margin: auto;
+}

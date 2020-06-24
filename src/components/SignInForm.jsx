@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../API.js";
+import { Form, Button, Message } from "semantic-ui-react"
 
 class SignInForm extends React.Component {
   constructor(props) {
@@ -24,16 +25,14 @@ class SignInForm extends React.Component {
 
   render() {
     return (
-      <div
-        className="ui center aligned middle aligned grid"
-      >
-        <div className="column" style={{ maxWidth: "450px" }}>
+
+        <div className="signin">
           <h2 className="ui black center aligned header">
             Log-in to your account
           </h2>
-          <div className="ui large form">
-            <div className="ui stacked segment">
-              <div className="field">
+          <Form warning={true} onSubmit={this.handleSubmit} size="large">
+            {/* <div className="ui stacked segment"> */}
+              <Form.Field >
                 <div className="ui fluid left icon input">
                   <input
                     placeholder="E-mail address"
@@ -43,8 +42,8 @@ class SignInForm extends React.Component {
                   />
                   <i aria-hidden="true" className="user icon"></i>
                 </div>
-              </div>
-              <div className="field">
+              </Form.Field>
+              <Form.Field>
                 <div className="ui fluid left icon input">
                   <input
                     placeholder="Password"
@@ -54,21 +53,19 @@ class SignInForm extends React.Component {
                   />
                   <i aria-hidden="true" className="lock icon"></i>
                 </div>
-              </div>
-              <button
+                </Form.Field>
+              <Button
                 className="ui teal large fluid button"
-                onClick={this.handleSubmit}
                 style={{ backgroundColor: "black" }}
               >
                 Sign In
-              </button>
-            </div>
-          </div>
-          <div className="ui message">
+              </Button>
+            
+          </Form>
+          <Message>
             New to us? <a href="/sign-up">Sign Up</a>
-          </div>
+          </Message>
         </div>
-      </div>
     );
   }
 }
