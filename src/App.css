@@ -38,3 +38,23 @@
     transform: rotate(360deg);
   }
 }
+
+.main-page {
+  max-width: 900px;
+}
+
+.homepage {
+  margin-top: 150px;
+}
+
+.nav-bar {
+  height: 70px;
+}
+
+.logo {
+  margin: 10px 0;
+}
+
+.candidates {
+  margin-bottom: 15px;
+}

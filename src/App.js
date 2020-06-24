@@ -11,6 +11,7 @@ import Matches from "./components/Matches/Matches.jsx";
 import Candidates from "./components/Candidates/Candidates.jsx";
 import NavBar from "./components/NavBar.jsx";
 import EditProfileMain from "./components/Edit/EditProfileMain.jsx";
+import { Container, Image } from 'semantic-ui-react'
 
 class App extends React.Component {
   constructor() {
@@ -99,10 +100,11 @@ class App extends React.Component {
     return (
       <CloudinaryContext cloudName="jamradar">
         {(this.state.email) ? (<NavBar  email={this.state.email} signOut={this.signOut} />) : ""}
-        <div className="ui grid container">
+        <Container textAlign="center">
+          <Image className="logo" src='https://res.cloudinary.com/jamradar/image/upload/c_crop,h_301/v1592840472/Logo.jpg' centered={true}/>
           {!this.state.email && (
             <Route exact path="/" component={() => <Home />} />
-          )}
+            )}
           <Route
             exact
             path="/sign-up"
@@ -111,7 +113,7 @@ class App extends React.Component {
                 userDetails={this.state.userDetails}
                 signIn={this.signIn}
                 redirectTo={this.redirectTo}
-              />
+                />
             )}
           />
           <Route
@@ -122,14 +124,14 @@ class App extends React.Component {
                 saveQuestionnaire={this.saveQuestionnaire}
                 preferences={this.state.preferences}
               />
-            )}
-          />
+              )}
+              />
 
           <Route
             exact
             path="/sign-in"
             component={() => <SignInForm signIn={this.signIn} />}
-          />
+            />
           <Route
             exact
             path="/matches"
@@ -138,18 +140,19 @@ class App extends React.Component {
                 email={this.state.email}
                 preferences={this.state.preferences}
                 users={this.state.users}
-              />
-            )}
-          />
+                />
+                )}
+                />
           <Route exact path="/candidates" component={() => <Candidates />} />
           <Route
             exact
             path="/edit"
             component={() => <EditProfileMain redirectTo={this.redirectTo} signOut={this.signOut}/>}
-          />
-        </div>
+            />
+        </Container>
       </CloudinaryContext>
     );
+          
   }
 }
 

@@ -16,7 +16,7 @@ class CandidateCard extends React.Component {
   render() {
     const { candidate, handleInterested } = this.props;
     return (
-      <div className="ui column">
+      
         <div className="ui fluid card" key={candidate.id}>
           <div className="ui fluid image">
             {candidate.image ? (
@@ -109,7 +109,7 @@ class CandidateCard extends React.Component {
             </span>
           </div>
         </div>
-      </div>
+      
     );
   }
 
