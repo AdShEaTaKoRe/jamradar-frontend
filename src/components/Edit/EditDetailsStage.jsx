@@ -17,19 +17,21 @@ const EditDetailsStage = ({
     <Form.Field>
       {userDetails.image ? (
         <Image
-        circular
-        centered
+          circular
+          centered
+          size="small"
           alt="oh no!"
           src={`https://res.cloudinary.com/jamradar/image/upload/v1592385784/${userDetails.image}.jpg`}
         />
       ) : (
         <Image
+          size="small"
           alt="oh no!"
           src={`https://res.cloudinary.com/jamradar/image/upload/v1592423891/no_profile_image_vu5zfp.jpg`}
         />
       )}
-      </Form.Field>
-      <Form.Field>
+    </Form.Field>
+    <Form.Field>
       <Button color="instagram" onClick={beginUpload} fluid={true}>
         <Icon fitted={true} name="camera" /> Change Image
       </Button>

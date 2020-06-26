@@ -7,7 +7,6 @@ import { UserLevelStage } from "./UserLevelStage.jsx";
 import { UserAspirationStage } from "./UserAspirationStage.jsx";
 import { UserAboutStage } from "./UserAboutStage.jsx";
 import { openUploadWidget } from "../../CloudinaryService.js";
-import { Container } from "semantic-ui-react";
 
 class SignUpStages extends React.Component {
   state = {
@@ -116,7 +115,7 @@ class SignUpStages extends React.Component {
   render() {
     return (
 
-      <Container>
+      <div className="signup">
         {this.state.currentStage === 1 ? (
           <UserDetailsStage
             nextStage={this.nextStage}
@@ -178,7 +177,7 @@ class SignUpStages extends React.Component {
         ) : (
           " "
         )}
-      </Container>
+      </div>
     );
   }
 }

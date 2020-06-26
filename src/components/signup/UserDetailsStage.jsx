@@ -122,6 +122,7 @@ const UserDetailsStage = ({
         <Icon name="angle double right" />
       </Button>
     </Form.Field>
+    <br></br><br/>
   </Form>
 );
 

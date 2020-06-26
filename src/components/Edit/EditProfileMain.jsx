@@ -8,7 +8,6 @@ import { EditAspirationStage } from "./EditAspirationStage.jsx";
 import { EditAboutStage } from "./EditAboutStage.jsx";
 import { openUploadWidget } from "../../CloudinaryService.js";
 import ModalCloseConfig from "../ModalCloseConfig.jsx";
-import { Container } from "semantic-ui-react";
 
 class EditProfile extends React.Component {
   constructor() {
@@ -137,7 +136,7 @@ class EditProfile extends React.Component {
 
   render() {
     return (
-      <Container>
+      <div className="edit">
         <EditDetailsStage
           userDetails={this.state.userDetails}
           handleChange={this.handleChange}
@@ -166,7 +165,7 @@ class EditProfile extends React.Component {
           handleSubmit={this.handleSubmit}
         />
         <ModalCloseConfig handleDelete={this.handleDelete} />
-      </Container>
+      </div>
     );
   }
 }
