@@ -5,6 +5,7 @@ import { MatchGenresStage } from "./MatchGenresStage.jsx";
 import { MatchLevelStage } from "./MatchLevelStage.jsx";
 import { MatchGoalStage } from "./MatchGoalStage.jsx";
 import { MatchDetailsStage } from "./MatchDetailsStage.jsx";
+import { Container } from "semantic-ui-react";
 
 class QuestionnaireStages extends React.Component {
   state = {
@@ -15,50 +16,69 @@ class QuestionnaireStages extends React.Component {
       match_goal: "",
       match_level: "",
       min_age: "",
-      max_age: ""
-    }
+      max_age: "",
+    },
   };
 
   componentDidMount() {
     if (this.props.preferences) {
       this.setState({
-        userPreferences: this.props.preferences
+        userPreferences: this.props.preferences,
       });
     }
-  
   }
 
   nextStage = () => {
     this.setState({
-      currentStage: this.state.currentStage + 1
+      currentStage: this.state.currentStage + 1,
     });
   };
 
   previousStage = () => {
     this.setState({
-      currentStage: this.state.currentStage - 1
+      currentStage: this.state.currentStage - 1,
     });
   };
 
-  handleChange = event => {
+  handleMatchGoalChange = (e, { value }) => {
+    this.setState({
+      userPreferences: {
+        ...this.state.userPreferences,
+        match_goal: value,
+      },
+    });
+  };
+
+  handleMatchLevelChange = (e, { value }) => {
+    this.setState({
+      userPreferences: {
+        ...this.state.userPreferences,
+        match_level: value,
+      },
+    });
+  };
+
+  handleChange = (event) => {
     const inputType = event.target.name;
     const inputValue = event.target.value;
     const userPreferences = this.state.userPreferences;
     userPreferences[inputType] = inputValue;
     this.setState({
-      userPreferences: userPreferences
+      userPreferences: userPreferences,
     });
   };
 
   handleListSelection = (type, value) => {
     let { userPreferences } = this.state;
     if (userPreferences[type].includes(value)) {
-      userPreferences[type] = userPreferences[type].filter(el => el !== value);
+      userPreferences[type] = userPreferences[type].filter(
+        (el) => el !== value
+      );
     } else {
       userPreferences[type].push(value);
     }
     this.setState({
-      userPreferences: userPreferences
+      userPreferences: userPreferences,
     });
   };
 
@@ -66,13 +86,12 @@ class QuestionnaireStages extends React.Component {
     const { userPreferences } = this.state;
     API.submitQuestionnaire(userPreferences, localStorage.token).then(() =>
       this.props.saveQuestionnaire(userPreferences)
-    )
+    );
   };
 
   render() {
     return (
-      <div className="ui column grid">
-      <div className="column" style={{ maxWidth: "450px" }}>
+      <Container>
         {this.state.currentStage === 1 ? (
           <MatchInstrumentsStage
             nextStage={this.nextStage}
@@ -96,7 +115,7 @@ class QuestionnaireStages extends React.Component {
           <MatchLevelStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            handleChange={this.handleMatchLevelChange}
             userPreferences={this.state.userPreferences}
           />
         ) : (
@@ -106,7 +125,7 @@ class QuestionnaireStages extends React.Component {
           <MatchGoalStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            handleChange={this.handleMatchGoalChange}
             userPreferences={this.state.userPreferences}
           />
         ) : (
@@ -123,8 +142,7 @@ class QuestionnaireStages extends React.Component {
         ) : (
           ""
         )}
-      </div>
-      </div>
+      </Container>
     );
   }
 }

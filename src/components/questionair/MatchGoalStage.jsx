@@ -1,4 +1,32 @@
 import React from "react";
+import { Form, Button, Icon, Dropdown } from "semantic-ui-react";
+
+const matchGoalOptions = [
+  {
+    key: "Improvement",
+    text: "Improvement",
+    value: "Improvement",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Forming a band",
+    text: "Forming a band",
+    value: "Forming a band",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Musician for my band",
+    text: "Musician for my band",
+    value: "Musician for my band",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Just here to jam",
+    text: "Just here to jam",
+    value: "Just here to jam",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+];
 
 const MatchGoalStage = ({
   nextStage,
@@ -6,29 +34,29 @@ const MatchGoalStage = ({
   handleChange,
   userPreferences,
 }) => (
-  <div className="ui form">
-    <h3> For the purpose of?</h3>
-    <select
-      className="ui fluid dropdown"
-      name="match_goal"
-      value={userPreferences.match_goal}
-      onChange={handleChange}
-    >
-      <option value="goal">Their goal should be</option>
-      <option value="Improvement">Improvement</option>
-      <option value="Forming a band">Forming a band</option>
-      <option value="Musician for their band">Musician for my band</option>
-      <option value="Just here to jam">Just here to jam</option>
-    </select>{" "}
-    <br></br>
-    <br />
-    <button className="ui left floated button" onClick={previousStage}>
-      Back
-    </button>
-    <button className="ui right floated button" onClick={nextStage}>
-      Next
-    </button>
-  </div>
+  <Form>
+    <Form.Field>
+      <h3 id="headerim"> For the purpose of?</h3>
+      <Dropdown
+        placeholder="Their goal should be"
+        fluid={true}
+        selection={true}
+        options={matchGoalOptions}
+        defaultValue={userPreferences.match_goal}
+        onChange={handleChange}
+      />
+    </Form.Field>
+    <Form.Field>
+      <Button onClick={previousStage} color="instagram" floated="left">
+        <Icon name="angle double left" />
+        Back
+      </Button>
+      <Button onClick={nextStage} color="instagram" floated="right">
+        Next
+        <Icon name="angle double right" />
+      </Button>
+    </Form.Field>
+  </Form>
 );
 
 export { MatchGoalStage };

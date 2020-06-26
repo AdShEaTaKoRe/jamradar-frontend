@@ -1,34 +1,39 @@
 import React from "react";
 import API from "../../API.js";
-import { Checkbox } from "semantic-ui-react";
+import { Checkbox, Icon, Form, Button, Card } from "semantic-ui-react";
 
 const MatchInstrumentsStage = ({
   nextStage,
   selectInstrument,
   instruments,
 }) => (
-  <div className="ui form">
-    <h3> What instruments should they play</h3>
-    <div className="ui fluid card">
-      {API.getInstruments().map((instrument) => (
-        <div key={instrument.id}>
-          <Checkbox
-            toggle
-            type="checkbox"
-            defaultValue={instrument.name}
-            checked={instruments.includes(instrument.id)}
-            onChange={() => selectInstrument("match_instrument", instrument.id)}
-          />
-          {instrument.name}
-        </div>
-      ))}
-    </div>
-    <br></br>
-    <br />
-    <button className="ui right floated button" onClick={nextStage}>
-      Next
-    </button>
-  </div>
+  <Form>
+    <Form.Field>
+      <Card.Group itemsPerRow={1}>
+        <h3 id="headerim"> What instruments should they play</h3>
+        {API.getInstruments().map((instrument) => (
+          <Card key={instrument.id}>
+            <Checkbox
+              toggle
+              type="checkbox"
+              defaultValue={instrument.name}
+              checked={instruments.includes(instrument.id)}
+              onChange={() =>
+                selectInstrument("match_instrument", instrument.id)
+              }
+              label={instrument.name}
+            />
+          </Card>
+        ))}
+      </Card.Group>
+    </Form.Field>
+    <Form.Field>
+      <Button onClick={nextStage} color="instagram" floated="right">
+        Next
+        <Icon name="angle double right" />
+      </Button>
+    </Form.Field>
+  </Form>
 );
 
 export { MatchInstrumentsStage };
