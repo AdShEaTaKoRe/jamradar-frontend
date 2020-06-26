@@ -16,6 +16,7 @@ class Matches extends React.Component {
       matches: [],
       toggle: false,
     };
+    
   }
 
   frontBackToggle = () => {
