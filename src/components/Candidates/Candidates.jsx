@@ -1,7 +1,7 @@
 import React from "react";
 import API from "../../API.js";
 import CandidateCard from "./CandidateCard.jsx";
-import { Container, Message, Icon } from "semantic-ui-react";
+import { Container, Message } from "semantic-ui-react";
 
 class Candidates extends React.Component {
   constructor() {
