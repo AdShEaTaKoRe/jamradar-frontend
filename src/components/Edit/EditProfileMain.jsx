@@ -82,6 +82,32 @@ class EditProfile extends React.Component {
     });
   };
 
+  handleLevelChange = (e, { value }) =>
+    this.setState({
+      userDetails: {
+        ...this.state.userDetails,
+        level: value,
+      },
+    });
+
+  handleGoalChange = (e, { value }) => {
+    this.setState({
+      userDetails: {
+        ...this.state.userDetails,
+        goal: value,
+      },
+    });
+  };
+
+  handleGenderChange = (e, { value }) => {
+    this.setState({
+      userDetails: {
+        ...this.state.userDetails,
+        gender: value,
+      },
+    });
+  };
+
   handleListSelection = (type, value) => {
     let { userDetails } = this.state;
     if (userDetails[type].includes(value)) {
@@ -110,41 +136,35 @@ class EditProfile extends React.Component {
 
   render() {
     return (
-      <div className="ui column grid">
-        <div className="column" style={{ maxWidth: "450px" }}>
-          <img
-            src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-            alt=""
-            className="ui fluid image"
-          />
-          <EditDetailsStage
-            userDetails={this.state.userDetails}
-            handleChange={this.handleChange}
-          />
-          <EditProfessionStage
-            selectInstrument={this.handleListSelection}
-            instruments={this.state.userDetails.instruments}
-          />
-          <EditGenresStage
-            selectGenre={this.handleListSelection}
-            genres={this.state.userDetails.genres}
-          />
-          <EditLevelStage
-            userDetails={this.state.userDetails}
-            handleChange={this.handleChange}
-          />
-          <EditAspirationStage
-            userDetails={this.state.userDetails}
-            handleChange={this.handleChange}
-          />
-          <EditAboutStage
-            handleChange={this.handleChange}
-            userDetails={this.state.userDetails}
-            handleSubmit={this.handleSubmit}
-            beginUpload={this.beginUpload}
-          />
-          <ModalCloseConfig handleDelete={this.handleDelete} />
-        </div>
+      <div className="edit">
+        <EditDetailsStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleChange}
+          handleGenderChange={this.handleGenderChange}
+          beginUpload={this.beginUpload}
+        />
+        <EditProfessionStage
+          selectInstrument={this.handleListSelection}
+          instruments={this.state.userDetails.instruments}
+        />
+        <EditGenresStage
+          selectGenre={this.handleListSelection}
+          genres={this.state.userDetails.genres}
+        />
+        <EditLevelStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleLevelChange}
+        />
+        <EditAspirationStage
+          userDetails={this.state.userDetails}
+          handleChange={this.handleGoalChange}
+        />
+        <EditAboutStage
+          handleChange={this.handleChange}
+          userDetails={this.state.userDetails}
+          handleSubmit={this.handleSubmit}
+        />
+        <ModalCloseConfig handleDelete={this.handleDelete} />
       </div>
     );
   }

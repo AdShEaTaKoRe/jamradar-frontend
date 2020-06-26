@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal } from 'semantic-ui-react'
+import { Button, Modal, Form } from 'semantic-ui-react'
 
 class ModalCloseConfig extends Component {
   state = { open: false }
@@ -15,8 +15,8 @@ class ModalCloseConfig extends Component {
     const { handleDelete } = this.props
 
     return (
-      <div>
-        <Button onClick={this.closeConfigShow(false, true)} className="ui centre floated button" >
+      <Form>
+        <Button onClick={this.closeConfigShow(false, true)} floated="left" color="red" >
           Delete Account
           
         </Button>
@@ -43,7 +43,7 @@ class ModalCloseConfig extends Component {
             />
           </Modal.Actions>
         </Modal>
-      </div>
+      </Form>
     )
   }
 }

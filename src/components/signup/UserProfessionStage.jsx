@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../API.js";
-import { Checkbox } from "semantic-ui-react";
+import { Checkbox, Icon, Form, Button, Card } from "semantic-ui-react";
 
 const UserProfessionStage = ({
   nextStage,
@@ -8,31 +8,38 @@ const UserProfessionStage = ({
   selectInstrument,
   instruments,
 }) => (
-  <div className="ui form">
-    <h3> Please choose your instruments</h3>
-    <div className="ui fluid card">
+  <Form>
+    <Form.Field>
+  <Card.Group itemsPerRow={1} >
+    <h3 id="headerim"> Please choose your instruments</h3>
       {API.getInstruments().map((instrument) => (
-        <div key={instrument.id}>
+        <Card key={instrument.id}>  
           <Checkbox
-            toggle
+            toggle={true}
             type="checkbox"
             defaultValue={instrument.name}
             checked={instruments.includes(instrument.id)}
             onChange={() => selectInstrument("instruments", instrument.id)}
-          />
-          {instrument.name}
-        </div>
+          label={instrument.name}/>
+          </Card>
       ))}
-    </div>
-    <br></br>
-    <br />
-    <button className="ui left floated button" onClick={previousStage}>
-      Back
-    </button>
-    <button className="ui right floated button" onClick={nextStage}>
+      </Card.Group>
+      </Form.Field>
+      
+    <Button onClick={previousStage} color="instagram"
+      floated="left">
+<Icon name="angle double left" />
+Back
+    </Button>
+    <Button
+      onClick={nextStage}
+      color="instagram"
+      floated="right"
+    >
       Next
-    </button>
-  </div>
+      <Icon name="angle double right" />
+    </Button>
+    </Form>
 );
 
 export { UserProfessionStage };

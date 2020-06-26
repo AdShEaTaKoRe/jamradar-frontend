@@ -53,6 +53,24 @@ class SignUpStages extends React.Component {
     });
   };
 
+  handleLevelChange = (e, { value }) => this.setState({userDetails: {
+    ...this.state.userDetails,
+    level: value,
+  } })
+
+  handleGoalChange = (e, {value}) => {
+    this.setState({userDetails: {
+    ...this.state.userDetails,
+    goal: value
+  }})}
+
+  handleGenderChange = (e, {value}) => {
+    this.setState({userDetails: {
+    ...this.state.userDetails,
+    gender: value
+  }})}
+  
+
   nextStage = () => {
     this.setState({
       currentStage: this.state.currentStage + 1,
@@ -68,6 +86,7 @@ class SignUpStages extends React.Component {
       userDetails: userDetails,
     });
   };
+
 
   handleListSelection = (type, value) => {
     let { userDetails } = this.state;
@@ -95,22 +114,15 @@ class SignUpStages extends React.Component {
 
   render() {
     return (
-      <div
-      className="ui center aligned middle aligned grid"
-      style={{ height: "100vh" }}
-    >
-      <div className="ui column grid">
-      <div className="column" style={{ maxWidth: "450px" }}>
-                 <img
-          src="https://res.cloudinary.com/jamradar/image/upload/v1586204803/Logo.jpg"
-          alt=""
-          className="ui fluid image"
-        />
+
+      <div className="signup">
         {this.state.currentStage === 1 ? (
           <UserDetailsStage
             nextStage={this.nextStage}
             handleChange={this.handleChange}
+            handleGenderChange={this.handleGenderChange}
             userDetails={this.state.userDetails}
+            beginUpload={this.beginUpload}
           />
         ) : (
           ""
@@ -139,7 +151,7 @@ class SignUpStages extends React.Component {
           <UserLevelStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            handleChange={this.handleLevelChange}
             userDetails={this.state.userDetails}
           />
         ) : (
@@ -149,7 +161,7 @@ class SignUpStages extends React.Component {
           <UserAspirationStage
             nextStage={this.nextStage}
             previousStage={this.previousStage}
-            handleChange={this.handleChange}
+            handleChange={this.handleGoalChange}
             userDetails={this.state.userDetails}
           />
         ) : (
@@ -161,13 +173,10 @@ class SignUpStages extends React.Component {
             handleChange={this.handleChange}
             userDetails={this.state.userDetails}
             handleSubmit={this.handleSubmit}
-            beginUpload={this.beginUpload}
           />
         ) : (
           " "
         )}
-      </div>
-      </div>
       </div>
     );
   }
