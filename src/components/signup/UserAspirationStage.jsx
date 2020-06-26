@@ -1,18 +1,60 @@
-import React from "react"
+import React from "react";
+import { Form, Button, Icon, Dropdown } from "semantic-ui-react";
 
-const UserAspirationStage = ({ nextStage, previousStage, handleChange, userDetails }) => (
-    <div role="listbox" className="ui form">
-      <h3> What is your goal here</h3>
-      <select className="ui fluid selection dropdown" name="goal" value={userDetails.goal} onChange={handleChange}>
-        <option value="goal">My goal is</option>
-        <option value="Improvement">Improvement</option>
-        <option value="Forming a band">Forming a band</option>
-        <option value="Musician for my band">Musician for my band</option>
-        <option value="Just here to jam">Just here to jam</option>
-      </select><br></br><br/>
-      <button className="ui left floated button" onClick={previousStage}>Back</button>
-      <button className="ui right floated button" onClick={nextStage}>Next</button>
-    </div>
-  );
+const goalOptions = [
+  {
+    key: "Improvement",
+    text: "Improvement",
+    value: "Improvement",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Forming a band",
+    text: "Forming a band",
+    value: "Forming a band",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Musician for my band",
+    text: "Musician for my band",
+    value: "Musician for my band",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+  {
+    key: "Just here to jam",
+    text: "Just here to jam",
+    value: "Just here to jam",
+    // image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
+  },
+];
 
-export { UserAspirationStage }
+const UserAspirationStage = ({
+  nextStage,
+  previousStage,
+  handleChange,
+  userDetails,
+}) => (
+  <Form>
+    <Form.Field>
+      <h3 id="headerim"> What is your goal here</h3>
+      <Dropdown
+        onChange={handleChange}
+        placeholder="My goal is"
+        fluid={true}
+        selection={true}
+        options={goalOptions}
+        defaultValue={userDetails.goal}
+      />
+    </Form.Field>
+    <Button onClick={previousStage} color="instagram" floated="left">
+      <Icon name="angle double left" />
+      Back
+    </Button>
+    <Button onClick={nextStage} color="instagram" floated="right">
+      Next
+      <Icon name="angle double right" />
+    </Button>
+  </Form>
+);
+
+export { UserAspirationStage };

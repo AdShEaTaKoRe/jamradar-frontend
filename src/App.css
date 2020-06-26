@@ -63,3 +63,19 @@
   max-width: 400px;
   margin: auto;
 }
+
+.labels {
+  text-align: left;
+  margin-top: 15px;
+}
+
+  /* .instrucheck {
+    margin :auto;
+  } */
+/* .profession-container {
+  margin-bottom: 15px;
+} */
+
+#headerim {
+  text-align: left;
+}

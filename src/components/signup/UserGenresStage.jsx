@@ -1,33 +1,35 @@
 import React from "react";
 import API from "../../API.js";
-import { Checkbox } from "semantic-ui-react";
+import { Checkbox, Button, Form, Card, Icon } from "semantic-ui-react";
 
 const UserGenresStage = ({ nextStage, previousStage, selectGenre, genres }) => (
-  <div className="ui form">
-    <h3> Please choose the genres you play</h3>
-    <div className="ui fluid card">
-      {API.getGenres().map((genre) => (
-        <div key={genre.id}>
-          <Checkbox
-            toggle
-            type="checkbox"
-            defaultValue={genre.name}
-            checked={genres.includes(genre.id)}
-            onChange={() => selectGenre("genres", genre.id)}
-          />
-          {genre.name}
-        </div>
-      ))}
-    </div>
-    <br></br>
-    <br />
-    <button className="ui left floated button" onClick={previousStage}>
+  <Form>
+    <Form.Field>
+      <Card.Group itemsPerRow={1}>
+        <h3 id="headerim"> Please choose your genres</h3>
+        {API.getGenres().map((genre) => (
+          <Card key={genre.id}>
+            <Checkbox
+              toggle
+              type="checkbox"
+              defaultValue={genre.name}
+              checked={genres.includes(genre.id)}
+              onChange={() => selectGenre("genres", genre.id)}
+              label={genre.name}
+            />
+          </Card>
+        ))}
+      </Card.Group>
+    </Form.Field>
+    <Button onClick={previousStage} color="instagram" floated="left">
+      <Icon name="angle double left" />
       Back
-    </button>
-    <button className="ui right floated button" onClick={nextStage}>
+    </Button>
+    <Button onClick={nextStage} color="instagram" floated="right">
       Next
-    </button>
-  </div>
+      <Icon name="angle double right" />
+    </Button>
+  </Form>
 );
 
 export { UserGenresStage };
