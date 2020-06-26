@@ -1,7 +1,7 @@
 import React from "react";
 import API from "../../API.js";
 import CandidateCard from "./CandidateCard.jsx";
-import { Container } from "semantic-ui-react";
+import { Container, Message, Icon } from "semantic-ui-react";
 
 class Candidates extends React.Component {
   constructor() {
@@ -67,14 +67,15 @@ class Candidates extends React.Component {
             handleInterested={this.handleInterested}
           />
         ) : (
-          <div className="ui icon message">
-            <i aria-hidden="true" className="circle notched loading icon"></i>
-            <div className="content">
-              <div className="header">Sorry,</div>
+          <Message icon>
+            
+            {/* <Icon aria-hidden="true" className='circle notched' loading/> */}
+            <Message.Content>
+              <Message.Header>Sorry,</Message.Header>
               it looks like there's no one here at the moment.. please try again
               later or change your search.
-            </div>
-          </div>
+            </Message.Content>
+          </Message>
         )}
       </Container>
     );
