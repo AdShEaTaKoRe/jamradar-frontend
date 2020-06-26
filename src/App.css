@@ -58,7 +58,21 @@
 .candidates {
   max-width: 400px;
   margin: auto;
-  margin-bottom: 15px;
+}
+
+.signup {
+  margin: auto;
+  max-width: 400px;
+}
+.edit {
+  margin: auto;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+.questionare {
+  margin: auto;
+  max-width: 400px;
+  margin-bottom: 30px;
 }
 
 .signin {

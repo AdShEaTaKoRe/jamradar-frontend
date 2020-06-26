@@ -5,7 +5,6 @@ import { MatchGenresStage } from "./MatchGenresStage.jsx";
 import { MatchLevelStage } from "./MatchLevelStage.jsx";
 import { MatchGoalStage } from "./MatchGoalStage.jsx";
 import { MatchDetailsStage } from "./MatchDetailsStage.jsx";
-import { Container } from "semantic-ui-react";
 
 class QuestionnaireStages extends React.Component {
   state = {
@@ -91,7 +90,7 @@ class QuestionnaireStages extends React.Component {
 
   render() {
     return (
-      <Container>
+      <div className="questionare">
         {this.state.currentStage === 1 ? (
           <MatchInstrumentsStage
             nextStage={this.nextStage}
@@ -142,7 +141,7 @@ class QuestionnaireStages extends React.Component {
         ) : (
           ""
         )}
-      </Container>
+      </div>
     );
   }
 }
