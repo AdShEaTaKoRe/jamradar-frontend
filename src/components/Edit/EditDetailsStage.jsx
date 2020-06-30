@@ -96,7 +96,7 @@ const EditDetailsStage = ({
         placeholder="Please choose one of the following"
         fluid={true}
         selection={true}
-        defaultValue={userDetails.gender}
+        value={userDetails.gender}
         onChange={handleGenderChange}
         options={genderOptions}
       />

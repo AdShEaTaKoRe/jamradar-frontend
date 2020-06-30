@@ -44,7 +44,7 @@ const EditLevelStage = ({ handleChange, userDetails }) => (
         fluid={true}
         selection={true}
         options={levelOptions}
-        defaultValue={userDetails.level}
+        value={userDetails.level}
       />
     </Form.Field>
   </Form>
