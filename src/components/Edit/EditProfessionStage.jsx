@@ -12,7 +12,7 @@ const EditProfessionStage = ({ selectInstrument, instruments }) => (
             <Checkbox
               toggle
               type="checkbox"
-              defaultValue={instrument.name}
+              value={instrument.name}
               checked={instruments.includes(instrument.id)}
               onChange={() => selectInstrument("instruments", instrument.id)}
               label={instrument.name}

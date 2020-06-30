@@ -38,7 +38,7 @@ const EditAspirationStage = ({ handleChange, userDetails }) => (
         fluid={true}
         selection={true}
         options={goalOptions}
-        defaultValue={userDetails.goal}
+        value={userDetails.goal}
       />
     </Form.Field>
   </Form>
