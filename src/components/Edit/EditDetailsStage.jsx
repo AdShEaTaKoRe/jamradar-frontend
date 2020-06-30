@@ -22,6 +22,7 @@ const EditDetailsStage = ({
           size="small"
           alt="oh no!"
           src={`https://res.cloudinary.com/jamradar/image/upload/v1592385784/${userDetails.image}.jpg`}
+          style={{ maxHeight: "150px" }}
         />
       ) : (
         <Image
