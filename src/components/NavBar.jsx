@@ -46,7 +46,7 @@ class NavBar extends React.Component {
               ) : (
                 ""
               )}
-              <Image size="tiny" className="logo" src='https://res.cloudinary.com/jamradar/image/upload/c_crop,h_301/v1592840472/Logo.jpg' fluid={true} />
+              <Image size="tiny" className="logo" src='https://res.cloudinary.com/jamradar/image/upload/c_crop,h_301/v1592840472/Logo.jpg' />
 
           </Menu>
         </Container>
