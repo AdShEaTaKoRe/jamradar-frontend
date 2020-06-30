@@ -6,7 +6,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <Container className="nav-bar">
-          <Menu icon='labeled' fixed="top" fluid style={{ backgroundColor: "#ffff99" }} size="mini">
+          <Menu icon='labeled' fixed="top" fluid style={{ backgroundColor: "black" }} size="mini" inverted={true}>
               <Link className="item" to="/edit">
                 <Icon
                   aria-hidden="true"
